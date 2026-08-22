@@ -10,7 +10,7 @@ export default function ContactSection() {
   const [sent, setSent] = useState(false);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
 
-  const email = 'muhammadtaqy4424@gmail.com';
+  const email = 'admin@aslynx.store';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);

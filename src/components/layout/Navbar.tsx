@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { Sparkles, Terminal, Box, Home, FolderGit2, FlaskConical, Github, ArrowUpRight } from 'lucide-react';
+import { Terminal, Box, Home, FolderGit2, FlaskConical, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -88,15 +88,6 @@ export default function Navbar() {
 
         {/* Right Action CTA */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            id="nav-drive-link"
-            href="/#google-drive-export"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-300 hover:text-white px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all shadow-sm"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Import to Drive</span>
-          </a>
-
           <Link
             href="/#contact"
             className="inline-flex items-center gap-1 text-xs font-medium text-black bg-gradient-to-r from-cyan-400 to-blue-400 hover:from-cyan-300 hover:to-blue-300 px-3.5 py-1.5 rounded-lg shadow-md transition-all active:scale-95"

@@ -56,7 +56,7 @@ export async function fetchCurseForgeStats(): Promise<CurseForgeStatsResponse> {
         Accept: 'application/json'
       },
       body: JSON.stringify({ modIds: projectIds }),
-      cache: 'no-store',
+      next: { revalidate: 900 },
       signal: AbortSignal.timeout(8000)
     });
 

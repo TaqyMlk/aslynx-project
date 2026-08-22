@@ -1,6 +1,5 @@
 import React from 'react';
 import Hero from '@/src/components/home/Hero';
-import GoogleDriveExportSection from '@/src/components/home/GoogleDriveExportSection';
 import AboutSection from '@/src/components/home/AboutSection';
 import FieldsSection from '@/src/components/home/FieldsSection';
 import SkillsSection from '@/src/components/home/SkillsSection';
@@ -17,7 +16,6 @@ export default async function HomePage() {
   return (
     <div className="w-full flex flex-col gap-4 sm:gap-8">
       <Hero totalDownloads={stats.totalDownloads} />
-      <GoogleDriveExportSection />
       <AboutSection />
       <FieldsSection />
       <SkillsSection />

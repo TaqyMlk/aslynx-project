@@ -34,9 +34,9 @@ export const SOCIALS: SocialLink[] = [
   },
   {
     name: 'Email',
-    url: 'mailto:muhammadtaqy4424@gmail.com',
+    url: 'mailto:admin@aslynx.store',
     iconName: 'Mail',
-    username: 'muhammadtaqy4424@gmail.com',
+    username: 'admin@aslynx.store',
     description: 'Direct inquiries, collaboration, and professional opportunities.',
     highlight: true
   }

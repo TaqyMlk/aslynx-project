@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { Terminal, Box, Home, FolderGit2, FlaskConical, ArrowUpRight } from 'lucide-react';
+import { Terminal, Box, Home, FolderGit2, FlaskConical, Search } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -88,13 +88,14 @@ export default function Navbar() {
 
         {/* Right Action CTA */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-1 text-xs font-medium text-black bg-gradient-to-r from-cyan-400 to-blue-400 hover:from-cyan-300 hover:to-blue-300 px-3.5 py-1.5 rounded-lg shadow-md transition-all active:scale-95"
+          <button
+            type="button"
+            aria-label="Search"
+            className="inline-flex items-center justify-center gap-1.5 text-xs font-medium text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 px-3.5 py-1.5 rounded-lg shadow-md transition-all active:scale-95"
           >
-            <span>Contact</span>
-            <ArrowUpRight className="w-3 h-3" />
-          </Link>
+            <Search className="w-3.5 h-3.5" />
+            <span>Search</span>
+          </button>
         </div>
       </nav>
     </header>

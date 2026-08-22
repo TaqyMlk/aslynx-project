@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { Sparkles, ArrowRight, Download, Terminal, Code2, Box, Flame } from 'lucide-react';
+import { ArrowRight, Terminal, Code2, Box, Flame } from 'lucide-react';
 
 interface HeroProps {
   totalDownloads: number;
@@ -67,14 +67,6 @@ export default function Hero({ totalDownloads }: HeroProps) {
           <ArrowRight className="w-4 h-4" />
         </Link>
 
-        <a
-          href="#google-drive-export"
-          className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-cyan-500/30 hover:border-cyan-500/50 text-cyan-300 font-semibold text-sm transition-all active:scale-95 shadow-sm"
-        >
-          <Sparkles className="w-4 h-4 text-cyan-400" />
-          <span>Import ke Drive</span>
-        </a>
-
         <Link
           href="/lab"
           className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl glass-panel hover:glass-panel-elevated border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium text-sm transition-all active:scale-95"
@@ -109,7 +101,6 @@ export default function Hero({ totalDownloads }: HeroProps) {
 
         <div className="glass-panel p-4 rounded-2xl flex flex-col items-center text-center border-white/5">
           <div className="flex items-center gap-1.5 text-purple-400 font-bold text-xl sm:text-2xl mb-1">
-            <Sparkles className="w-5 h-5" />
             <span>12+</span>
           </div>
           <span className="text-xs text-zinc-400 font-medium">Public Lab Tools</span>

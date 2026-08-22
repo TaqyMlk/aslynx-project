@@ -1,0 +1,6 @@
+{
+  "name": "AsLynx Unified Web",
+  "description": "AsLynx official unified platform: portfolio, project catalog, experimental lab workspace, and private AI infrastructure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

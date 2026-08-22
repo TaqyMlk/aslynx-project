@@ -1,0 +1,123 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { LabTool } from '@/src/types';
+import {
+  Bot,
+  Code2,
+  FileJson,
+  CheckSquare,
+  Layers,
+  Workflow,
+  Wand2,
+  Binary,
+  KeyRound,
+  FileText,
+  Palette,
+  Sparkle,
+  Orbit,
+  ArrowRight,
+  Sparkles
+} from 'lucide-react';
+
+interface ToolCardProps {
+  tool: LabTool;
+}
+
+export default function ToolCard({ tool }: ToolCardProps) {
+  const getToolIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'Bot':
+        return <Bot className="w-5 h-5 text-cyan-400" />;
+      case 'Code2':
+        return <Code2 className="w-5 h-5 text-blue-400" />;
+      case 'FileJson':
+        return <FileJson className="w-5 h-5 text-emerald-400" />;
+      case 'CheckSquare':
+        return <CheckSquare className="w-5 h-5 text-indigo-400" />;
+      case 'Layers':
+        return <Layers className="w-5 h-5 text-teal-400" />;
+      case 'Workflow':
+        return <Workflow className="w-5 h-5 text-amber-400" />;
+      case 'Wand2':
+        return <Wand2 className="w-5 h-5 text-purple-400" />;
+      case 'Binary':
+        return <Binary className="w-5 h-5 text-sky-400" />;
+      case 'KeyRound':
+        return <KeyRound className="w-5 h-5 text-yellow-400" />;
+      case 'FileText':
+        return <FileText className="w-5 h-5 text-rose-400" />;
+      case 'Palette':
+        return <Palette className="w-5 h-5 text-pink-400" />;
+      case 'Sparkle':
+        return <Sparkle className="w-5 h-5 text-orange-400" />;
+      case 'Orbit':
+        return <Orbit className="w-5 h-5 text-cyan-400" />;
+      default:
+        return <Sparkles className="w-5 h-5 text-cyan-400" />;
+    }
+  };
+
+  const categoryColor: Record<string, string> = {
+    ai: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+    dev: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+    minecraft: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+    utility: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+    experiment: 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+  };
+
+  return (
+    <Link
+      href={`/lab/${tool.slug}`}
+      className="glass-panel hover:glass-panel-elevated p-6 rounded-3xl border-white/5 hover:border-white/15 flex flex-col justify-between transition-all duration-300 group h-full"
+    >
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-4">
+          <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+            {getToolIcon(tool.icon)}
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <span
+              className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-lg border ${
+                categoryColor[tool.category] || categoryColor.utility
+              }`}
+            >
+              {tool.category}
+            </span>
+            {tool.badge && (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/5 text-zinc-300 border border-white/5">
+                {tool.badge}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <h3 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+          {tool.name}
+        </h3>
+
+        <p className="text-xs text-zinc-400 leading-relaxed mb-5">{tool.shortDesc}</p>
+      </div>
+
+      <div>
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {tool.tags.slice(0, 3).map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-zinc-400 border border-white/5"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors">
+          <span>Launch Tool</span>
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </div>
+    </Link>
+  );
+}

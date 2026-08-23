@@ -1,5 +1,6 @@
 import { saveFact, searchMemory } from './store';
 import { MemoryFact } from '@/src/types';
+import { safeId } from './validation';
 
 export interface ToolDefinition {
   name: string;
@@ -55,17 +56,6 @@ export const AGENT_TOOLS: ToolDefinition[] = [
       },
       required: ['query']
     }
-  },
-  {
-    name: 'code_executor',
-    description: 'Execute a JavaScript code snippet in a safe sandboxed runtime and capture output.',
-    parameters: {
-      type: 'object',
-      properties: {
-        code: { type: 'string', description: 'JavaScript code to execute' }
-      },
-      required: ['code']
-    }
   }
 ];
 
@@ -89,7 +79,7 @@ export async function executeTool(name: string, args: Record<string, unknown>): 
       const tags = Array.isArray(args?.tags) ? args.tags.map(String) : ['general'];
 
       const fact: MemoryFact = {
-        id: `fact_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+        id: safeId('fact'),
         key,
         value,
         category: 'custom',
@@ -148,41 +138,6 @@ export async function executeTool(name: string, args: Record<string, unknown>): 
         error: 'Web search is unavailable. SERPER_API_KEY is not configured. Please contact the administrator to enable live search.',
         unavailable: true
       };
-    }
-
-    case 'code_executor': {
-      const code = String(args?.code || '');
-      const logs: string[] = [];
-
-      try {
-        const customConsole = {
-          log: (...args: unknown[]) => logs.push(args.map(String).join(' ')),
-          error: (...args: unknown[]) => logs.push('[Error]: ' + args.map(String).join(' ')),
-          warn: (...args: unknown[]) => logs.push('[Warn]: ' + args.map(String).join(' '))
-        };
-
-        const runnable = new Function('console', `
-          "use strict";
-          try {
-            ${code}
-          } catch(e) {
-            console.error(e.message || String(e));
-          }
-        `);
-
-        runnable(customConsole);
-
-        return {
-          success: true,
-          output: logs.join('\n') || 'Code executed successfully with no stdout output.',
-          logCount: logs.length
-        };
-      } catch (err: unknown) {
-        return {
-          success: false,
-          error: err instanceof Error ? err.message : String(err)
-        };
-      }
     }
 
     default:

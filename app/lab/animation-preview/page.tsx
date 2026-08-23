@@ -80,7 +80,7 @@ export default function AnimationPreviewPage() {
 
           <button
             onClick={triggerAnimation}
-            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold text-xs transition-all active:scale-95 flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-xs transition-all active:scale-95 flex items-center justify-center gap-1.5"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Replay Animation</span>

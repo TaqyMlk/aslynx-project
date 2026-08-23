@@ -109,7 +109,7 @@ export default function MarkdownPreviewPage() {
           </div>
 
           <div
-            className="flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 leading-relaxed space-y-3 prose prose-invert max-w-none"
+            className="prose prose-invert flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 max-w-none"
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         </div>

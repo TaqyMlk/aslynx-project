@@ -1,47 +1,126 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
-import { Palette, Copy, Check, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Palette, Copy, Check, AlertTriangle } from 'lucide-react';
+
+const HEX_RE = /^#([0-9a-f]{6})$/i;
+
+function hexToHsl(hex: string) {
+  if (!HEX_RE.test(hex)) return { h: 0, s: 0, l: 0 };
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+}
+
+function hslToRgb(h: number, s: number, l: number): [number, number, number] {
+  const hue = ((h % 360) + 360) % 360 / 360;
+  const sat = Math.min(100, Math.max(0, s)) / 100;
+  const lig = Math.min(100, Math.max(0, l)) / 100;
+  if (sat === 0) {
+    const v = Math.round(lig * 255);
+    return [v, v, v];
+  }
+  const q = lig < 0.5 ? lig * (1 + sat) : lig + sat - lig * sat;
+  const p = 2 * lig - q;
+  const channel = (t: number) => {
+    let x = t;
+    if (x < 0) x += 1;
+    if (x > 1) x -= 1;
+    if (x < 1 / 6) return p + (q - p) * 6 * x;
+    if (x < 1 / 2) return q;
+    if (x < 2 / 3) return p + (q - p) * (2 / 3 - x) * 6;
+    return p;
+  };
+  return [
+    Math.round(channel(hue + 1 / 3) * 255),
+    Math.round(channel(hue) * 255),
+    Math.round(channel(hue - 1 / 3) * 255)
+  ];
+}
+
+/** WCAG 2.1 relative contrast ratio between two RGB colors. */
+function contrastRatio(rgbA: [number, number, number], rgbB: [number, number, number]): number {
+  const luminance = ([r, g, b]: [number, number, number]) => {
+    const lin = [r, g, b].map((c) => {
+      const s = c / 255;
+      return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+  };
+  const la = luminance(rgbA);
+  const lb = luminance(rgbB);
+  const lighter = Math.max(la, lb);
+  const darker = Math.min(la, lb);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+interface ContrastCheck {
+  ratio: number;
+  aaNormal: boolean;
+  aaLarge: boolean;
+  aaaNormal: boolean;
+  onWhiteIsReadable: boolean;
+}
 
 export default function ColorPalettePage() {
   const [baseColor, setBaseColor] = useState('#00f2fe');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  // Derive palettes
-  const hexToHsl = (hex: string) => {
-    let r = 0, g = 0, b = 0;
-    if (hex.length === 7) {
-      r = parseInt(hex.slice(1, 3), 16) / 255;
-      g = parseInt(hex.slice(3, 5), 16) / 255;
-      b = parseInt(hex.slice(5, 7), 16) / 255;
-    }
-    const max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h = 0, s = 0;
-    const l = (max + min) / 2;
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
-      }
-      h /= 6;
-    }
-    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
-  };
+  const validHex = HEX_RE.test(baseColor);
+  const normalizedHex = validHex ? baseColor.toLowerCase() : '#000000';
+  const hsl = hexToHsl(normalizedHex);
 
-  const hsl = hexToHsl(baseColor);
+  const palette = useMemo(() => {
+    if (!validHex) return [];
+    return [
+      { label: 'Base', hex: normalizedHex },
+      { label: 'Complementary', hex: `hsl(${(hsl.h + 180) % 360}, ${hsl.s}%, ${hsl.l}%)` },
+      { label: 'Analogous 1', hex: `hsl(${(hsl.h + 30) % 360}, ${hsl.s}%, ${hsl.l}%)` },
+      { label: 'Analogous 2', hex: `hsl(${(hsl.h + 330) % 360}, ${hsl.s}%, ${hsl.l}%)` },
+      { label: 'Triadic 1', hex: `hsl(${(hsl.h + 120) % 360}, ${hsl.s}%, ${hsl.l}%)` },
+      { label: 'Triadic 2', hex: `hsl(${(hsl.h + 240) % 360}, ${hsl.s}%, ${hsl.l}%)` }
+    ];
+  }, [validHex, normalizedHex, hsl.h, hsl.s, hsl.l]);
 
-  const palette = [
-    { label: 'Base', hex: baseColor },
-    { label: 'Complementary', hex: `hsl(${(hsl.h + 180) % 360}, ${hsl.s}%, ${hsl.l}%)` },
-    { label: 'Analogous 1', hex: `hsl(${(hsl.h + 30) % 360}, ${hsl.s}%, ${hsl.l}%)` },
-    { label: 'Analogous 2', hex: `hsl(${(hsl.h + 330) % 360}, ${hsl.s}%, ${hsl.l}%)` },
-    { label: 'Triadic 1', hex: `hsl(${(hsl.h + 120) % 360}, ${hsl.s}%, ${hsl.l}%)` },
-    { label: 'Triadic 2', hex: `hsl(${(hsl.h + 240) % 360}, ${hsl.s}%, ${hsl.l}%)` }
-  ];
+  // Real WCAG checks for every swatch against #090a0e (site background) and white.
+  const contrastChecks = useMemo<ContrastCheck[]>(() => {
+    if (!validHex) return [];
+    const siteBg: [number, number, number] = [9, 10, 14];
+    return palette.map((item) => {
+      const match = /hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/.exec(item.hex);
+      const rgb: [number, number, number] = match
+        ? hslToRgb(Number(match[1]), Number(match[2]), Number(match[3]))
+        : [
+            parseInt(normalizedHex.slice(1, 3), 16),
+            parseInt(normalizedHex.slice(3, 5), 16),
+            parseInt(normalizedHex.slice(5, 7), 16)
+          ];
+      const ratioVsSiteBg = contrastRatio(rgb, siteBg);
+      const ratioVsWhite = contrastRatio(rgb, [255, 255, 255]);
+      return {
+        ratio: ratioVsSiteBg,
+        aaNormal: ratioVsSiteBg >= 4.5,
+        aaLarge: ratioVsSiteBg >= 3,
+        aaaNormal: ratioVsSiteBg >= 7,
+        onWhiteIsReadable: ratioVsWhite >= 4.5
+      };
+    });
+  }, [palette, validHex, normalizedHex]);
 
   const handleCopyColor = (val: string, index: number) => {
     navigator.clipboard.writeText(val);
@@ -49,54 +128,77 @@ export default function ColorPalettePage() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  function badge(ratioOk: boolean, level: string) {
+    return (
+      <span
+        className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
+          ratioOk ? 'bg-emerald-500/15 text-emerald-400' : 'bg-zinc-500/15 text-zinc-500'
+        }`}
+      >
+        {level}
+      </span>
+    );
+  }
+
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 pb-24">
       <ToolHeader
         title="Color Harmony & WCAG Contrast"
         category="Utilities"
         badge="Design Systems"
-        description="Generate mathematical color harmonies (Analogous, Complementary, Triadic) and test dark background contrast ratios."
+        description="Generate mathematical color harmonies (Analogous, Complementary, Triadic) with real WCAG 2.1 contrast ratios against the site's dark background."
       />
 
       <div className="bg-[#12141c] p-6 rounded-2xl border border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <input
             type="color"
-            value={baseColor}
+            aria-label="Pick base color"
+            value={validHex ? baseColor : '#000000'}
             onChange={(e) => setBaseColor(e.target.value)}
             className="w-14 h-14 rounded-2xl cursor-pointer bg-transparent border-0"
           />
           <div>
-            <span className="text-xs text-zinc-400 block mb-0.5">Base Color HEX</span>
+            <label htmlFor="base-hex" className="text-xs text-zinc-400 block mb-0.5">Base Color HEX</label>
             <input
+              id="base-hex"
               type="text"
               value={baseColor}
               onChange={(e) => setBaseColor(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 text-white font-mono text-sm uppercase focus:outline-none focus:border-cyan-400"
+              maxLength={7}
+              spellCheck={false}
+              aria-invalid={!validHex}
+              className={`px-3 py-1.5 rounded-xl bg-black/40 border text-white font-mono text-sm uppercase focus:outline-none focus:border-cyan-400 ${
+                validHex ? 'border-white/10' : 'border-rose-400/60'
+              }`}
             />
+            {!validHex && (
+              <p role="alert" className="mt-1.5 flex items-center gap-1 text-[11px] text-rose-300">
+                <AlertTriangle className="w-3 h-3" /> Use a 6-digit hex like #00f2fe.
+              </p>
+            )}
           </div>
         </div>
 
         <div className="text-xs text-zinc-400 font-mono">
-          HSL: {hsl.h}°, {hsl.s}%, {hsl.l}%
+          HSL: {validHex ? `${hsl.h}°, ${hsl.s}%, ${hsl.l}%` : '—'}
         </div>
       </div>
 
       {/* Palette Swatches */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-8">
         {palette.map((item, idx) => (
-          <div
-            key={idx}
-            className="glass-panel p-3 rounded-2xl border-white/5 space-y-3 flex flex-col items-center text-center group"
-          >
+          <div key={idx} className="bg-white/[0.03] hover:bg-white/[0.06] p-3 rounded-2xl border border-white/5 space-y-3 flex flex-col items-center text-center group">
             <div
-              className="w-full h-24 rounded-xl shadow-md border border-white/10 group-hover:scale-105 transition-transform"
+              className="w-full h-24 rounded-xl shadow-md border border-white/10 group-hover:scale-[1.03] transition-transform"
               style={{ backgroundColor: item.hex }}
             />
             <div className="w-full">
               <span className="text-[11px] text-zinc-400 font-medium block truncate">{item.label}</span>
               <button
+                type="button"
                 onClick={() => handleCopyColor(item.hex, idx)}
+                aria-label={`Copy ${item.label} color ${item.hex}`}
                 className="mt-1 w-full py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[10px] font-mono text-zinc-200 transition-colors flex items-center justify-center gap-1"
               >
                 {copiedIndex === idx ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
@@ -106,6 +208,42 @@ export default function ColorPalettePage() {
           </div>
         ))}
       </div>
+
+      {/* WCAG Contrast Report */}
+      {validHex && contrastChecks.length > 0 && (
+        <section aria-labelledby="wcag-heading">
+          <h2 id="wcag-heading" className="text-sm font-bold text-white mb-1">WCAG 2.1 Contrast Report</h2>
+          <p className="text-xs text-zinc-500 mb-4">
+            Ratios are computed against the site background (#090a0e). AA requires ≥ 4.5:1 normal text or ≥ 3:1 large text; AAA requires ≥ 7:1.
+          </p>
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-white/[0.04] text-left text-zinc-400">
+                  <th scope="col" className="px-4 py-2.5 font-medium">Swatch</th>
+                  <th scope="col" className="px-4 py-2.5 font-medium text-right">Ratio</th>
+                  <th scope="col" className="px-4 py-2.5 font-medium">AA Normal</th>
+                  <th scope="col" className="px-4 py-2.5 font-medium">AA Large</th>
+                  <th scope="col" className="px-4 py-2.5 font-medium">AAA</th>
+                  <th scope="col" className="px-4 py-2.5 font-medium">On White</th>
+                </tr>
+              </thead>
+              <tbody className="[&_td]:py-2.5 [&_td]:px-4 divide-y divide-white/5">
+                {contrastChecks.map((check, idx) => (
+                  <tr key={idx}>
+                    <td className="font-mono text-zinc-300">{palette[idx].hex}</td>
+                    <td className="text-right font-mono tabular-nums text-zinc-200">{check.ratio.toFixed(2)}:1</td>
+                    <td>{badge(check.aaNormal, check.aaNormal ? 'PASS' : 'FAIL')}</td>
+                    <td>{badge(check.aaLarge, check.aaLarge ? 'PASS' : 'FAIL')}</td>
+                    <td>{badge(check.aaaNormal, check.aaaNormal ? 'AAA' : '—')}</td>
+                    <td className="text-zinc-500">{check.onWhiteIsReadable ? 'Readable' : 'Low'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

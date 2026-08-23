@@ -5,7 +5,7 @@ import { Sparkles, Heart, Terminal, Shield, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-white/5 bg-zinc-950/60 backdrop-blur-md pt-12 pb-24 md:pb-12 mt-20 relative overflow-hidden">
+    <footer className="w-full border-t border-white/5 bg-[#0b0d13] pt-12 pb-24 md:pb-12 mt-20 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Col 1: Identity */}

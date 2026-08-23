@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --bg-primary: #090a0f;
@@ -52,6 +53,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   border: 1px solid var(--border-subtle);
 }
 .glow-cyan, .glow-purple { box-shadow: none; }
+
+/* Real elevation hover for cards/buttons that previously used hover:glass-panel-elevated
+   (Tailwind variants cannot apply to plain custom classes). */
+.hover-surface {
+  transition: background-color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.hover-surface:hover { background: var(--bg-card-hover); border-color: var(--border-strong); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -101,8 +101,9 @@ export default function RegexTesterPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         {/* Test String */}
         <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-3">
-          <label className="block text-xs font-semibold text-zinc-300">Test String</label>
+          <label htmlFor="regex-test-string" className="block text-xs font-semibold text-zinc-300">Test String</label>
           <textarea
+            id="regex-test-string"
             rows={10}
             value={testString}
             onChange={(e) => setTestString(e.target.value)}

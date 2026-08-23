@@ -20,6 +20,8 @@ export default function PlaygroundPage() {
     let width = (canvas.width = canvas.parentElement?.clientWidth || 800);
     let height = (canvas.height = 480);
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const handleResize = () => {
       if (!canvas || !canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.clientWidth;
@@ -72,7 +74,9 @@ export default function PlaygroundPage() {
         }
       });
 
-      animationId = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animationId = requestAnimationFrame(render);
+      }
     };
 
     render();

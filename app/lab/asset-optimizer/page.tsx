@@ -18,6 +18,7 @@ export default function AssetOptimizerPage() {
 
   const totalVramMB = (textureMemoryBytes / (1024 * 1024)).toFixed(2);
   const totalAudioMB = (audioMemoryBytes / (1024 * 1024)).toFixed(2);
+  const totalScriptMB = (scriptMemoryBytes / (1024 * 1024)).toFixed(2);
   const totalEstMemoryMB = ((textureMemoryBytes + audioMemoryBytes + scriptMemoryBytes) / (1024 * 1024)).toFixed(2);
 
   const isOptimal = parseFloat(totalEstMemoryMB) < 15.0;
@@ -133,7 +134,7 @@ export default function AssetOptimizerPage() {
             </div>
             <div className="p-3.5 rounded-xl bg-white/5 flex items-center justify-between">
               <span className="text-zinc-300">Script Engine Memory</span>
-              <span className="font-mono font-bold text-purple-300">~0.4 MB</span>
+              <span className="font-mono font-bold text-purple-300">{totalScriptMB} MB</span>
             </div>
           </div>
 

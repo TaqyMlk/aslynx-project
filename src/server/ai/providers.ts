@@ -15,24 +15,59 @@ export interface AIResponse {
   model: string;
   latencyMs: number;
   tokensUsed?: { prompt: number; completion: number; total: number };
+  /** True when every provider failed and the offline notice is returned. */
+  fallback?: boolean;
 }
 
-export async function callAIProvider(options: AIRequestOptions): Promise<AIResponse> {
-  const startTime = Date.now();
+const GEMINI_TIMEOUT_MS = 20_000;
+
+function stripRoleMarkers(content: string): string {
+  return content
+    .replace(/^\s*(User|Assistant|System)\s*:\s*/gim, '')
+    .replace(/\[System Directive\]/gi, '[directive]');
+}
+
+async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return await Promise.race([
+    promise,
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error(`Timed out after ${ms}ms`)), ms))
+  ]);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function detectProvider(options: AIRequestOptions, hasKey: (k: string) => boolean): { provider: string; model: string } | null {
+  const p = options.preferredProvider || 'auto';
+  if (p === 'gemini' && hasKey('GEMINI')) return { provider: 'Gemini', model: 'gemini-2.5-flash' };
+  if (p === 'openrouter' && hasKey('OPENROUTER')) return { provider: 'OpenRouter', model: options.mode === 'coding' ? 'qwen/qwen-2.5-coder-32b-instruct' : 'meta-llama/llama-3.3-70b-instruct' };
+  if (p === 'groq' && hasKey('GROQ')) return { provider: 'Groq', model: 'llama-3.3-70b-versatile' };
+  if (p === 'auto') {
+    if (hasKey('OPENROUTER')) return { provider: 'OpenRouter', model: options.mode === 'coding' ? 'qwen/qwen-2.5-coder-32b-instruct' : 'meta-llama/llama-3.3-70b-instruct' };
+    if (hasKey('GROQ')) return { provider: 'Groq', model: 'llama-3.3-70b-versatile' };
+    if (hasKey('GEMINI')) return { provider: 'Gemini', model: 'gemini-2.5-flash' };
+  }
+  return null;
+}
+
+export async function* streamAIProvider(
+  options: AIRequestOptions
+): AsyncIterable<string> {
   const mode = options.mode || 'general';
   const temperature = options.temperature ?? 0.7;
 
-  const errors: string[] = [];
+  const hasKey = (name: string) => Boolean(process.env[`${name}_API_KEY`]);
 
-  // Try OpenRouter if key is present and requested/auto
+  // Try OpenRouter
   if (process.env.OPENROUTER_API_KEY && (options.preferredProvider === 'openrouter' || options.preferredProvider === 'auto')) {
     try {
       const model = mode === 'coding' ? 'qwen/qwen-2.5-coder-32b-instruct' : 'meta-llama/llama-3.3-70b-instruct';
       const formattedMessages = [];
-      if (options.systemPrompt) {
-        formattedMessages.push({ role: 'system', content: options.systemPrompt });
-      }
-      formattedMessages.push(...options.messages);
+      if (options.systemPrompt) formattedMessages.push({ role: 'system', content: options.systemPrompt });
+      formattedMessages.push(
+        ...options.messages.map((m) => ({ role: m.role, content: stripRoleMarkers(m.content) }))
+      );
 
       const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -46,43 +81,50 @@ export async function callAIProvider(options: AIRequestOptions): Promise<AIRespo
           model,
           messages: formattedMessages,
           temperature,
-          max_tokens: options.maxTokens || 2048
+          max_tokens: options.maxTokens || 2048,
+          stream: true
         }),
         signal: AbortSignal.timeout(15000)
       });
 
       if (res.ok) {
-        const data = await res.json();
-        const text = data?.choices?.[0]?.message?.content || '';
-        if (text) {
-          return {
-            text,
-            provider: 'OpenRouter',
-            model,
-            latencyMs: Date.now() - startTime,
-            tokensUsed: {
-              prompt: data?.usage?.prompt_tokens || 0,
-              completion: data?.usage?.completion_tokens || 0,
-              total: data?.usage?.total_tokens || 0
-            }
-          };
+        const reader = res.body?.getReader();
+        if (!reader) throw new Error('No response body');
+        const decoder = new TextDecoder();
+        let buffer = '';
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || !trimmed.startsWith('data:')) continue;
+            const data = trimmed.slice(5).trim();
+            if (data === '[DONE]') return;
+            try {
+              const parsed = JSON.parse(data);
+              const delta = parsed.choices?.[0]?.delta?.content;
+              if (delta) yield delta;
+            } catch { /* skip malformed chunk */ }
+          }
         }
+        return;
       }
-      errors.push(`OpenRouter status: ${res.status}`);
-    } catch (err: unknown) {
-      errors.push(`OpenRouter error: ${err instanceof Error ? err.message : String(err)}`);
-    }
+      throw new Error(`OpenRouter status: ${res.status}`);
+    } catch { /* fall through */ }
   }
 
-  // Try Groq if key is present
+  // Try Groq
   if (process.env.GROQ_API_KEY && (options.preferredProvider === 'groq' || options.preferredProvider === 'auto')) {
     try {
       const model = 'llama-3.3-70b-versatile';
       const formattedMessages = [];
-      if (options.systemPrompt) {
-        formattedMessages.push({ role: 'system', content: options.systemPrompt });
-      }
-      formattedMessages.push(...options.messages);
+      if (options.systemPrompt) formattedMessages.push({ role: 'system', content: options.systemPrompt });
+      formattedMessages.push(
+        ...options.messages.map((m) => ({ role: m.role, content: stripRoleMarkers(m.content) }))
+      );
 
       const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
@@ -94,85 +136,101 @@ export async function callAIProvider(options: AIRequestOptions): Promise<AIRespo
           model,
           messages: formattedMessages,
           temperature,
-          max_tokens: options.maxTokens || 2048
+          max_tokens: options.maxTokens || 2048,
+          stream: true
         }),
         signal: AbortSignal.timeout(12000)
       });
 
       if (res.ok) {
-        const data = await res.json();
-        const text = data?.choices?.[0]?.message?.content || '';
-        if (text) {
-          return {
-            text,
-            provider: 'Groq',
-            model,
-            latencyMs: Date.now() - startTime,
-            tokensUsed: {
-              prompt: data?.usage?.prompt_tokens || 0,
-              completion: data?.usage?.completion_tokens || 0,
-              total: data?.usage?.total_tokens || 0
-            }
-          };
+        const reader = res.body?.getReader();
+        if (!reader) throw new Error('No response body');
+        const decoder = new TextDecoder();
+        let buffer = '';
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || !trimmed.startsWith('data:')) continue;
+            const data = trimmed.slice(5).trim();
+            if (data === '[DONE]') return;
+            try {
+              const parsed = JSON.parse(data);
+              const delta = parsed.choices?.[0]?.delta?.content;
+              if (delta) yield delta;
+            } catch { /* skip */ }
+          }
         }
+        return;
       }
-      errors.push(`Groq status: ${res.status}`);
-    } catch (err: unknown) {
-      errors.push(`Groq error: ${err instanceof Error ? err.message : String(err)}`);
-    }
+      throw new Error(`Groq status: ${res.status}`);
+    } catch { /* fall through */ }
   }
 
-  // Gemini API (via process.env.GEMINI_API_KEY)
+  // Gemini stream
   const geminiKey = process.env.GEMINI_API_KEY;
-  if (geminiKey) {
+  if (geminiKey && (options.preferredProvider === 'gemini' || options.preferredProvider === 'auto')) {
     try {
       const ai = new GoogleGenAI({ apiKey: geminiKey });
       const modelName = 'gemini-2.5-flash';
+      const contents = options.messages
+        .map((m) => `${m.role === 'assistant' ? 'Assistant' : 'User'}: ${stripRoleMarkers(m.content)}`)
+        .join('\n\n');
 
-      const promptParts = [];
-      if (options.systemPrompt) {
-        promptParts.push(`[System Directive]: ${options.systemPrompt}\n\n`);
-      }
-
-      for (const m of options.messages) {
-        if (m.role === 'system') {
-          promptParts.push(`[System]: ${m.content}\n\n`);
-        } else if (m.role === 'user') {
-          promptParts.push(`User: ${m.content}\n`);
-        } else {
-          promptParts.push(`Assistant: ${m.content}\n`);
-        }
-      }
-
-      const response = await ai.models.generateContent({
-        model: modelName,
-        contents: promptParts.join('\n'),
-        config: {
-          temperature
-        }
-      });
-
-      const text = response.text || '';
-      if (text) {
-        return {
-          text,
-          provider: 'Gemini',
+      const stream = await withTimeout(
+        ai.models.generateContentStream({
           model: modelName,
-          latencyMs: Date.now() - startTime
-        };
+          contents,
+          config: {
+            temperature,
+            maxOutputTokens: options.maxTokens || 2048,
+            ...(options.systemPrompt ? { systemInstruction: options.systemPrompt } : {})
+          }
+        }),
+        GEMINI_TIMEOUT_MS
+      );
+
+      if (stream) {
+        for await (const chunk of stream) {
+          const text = chunk.text;
+          if (text) yield text;
+        }
+        return;
       }
-      errors.push('Gemini returned empty text');
-    } catch (err: unknown) {
-      errors.push(`Gemini error: ${err instanceof Error ? err.message : String(err)}`);
-    }
+    } catch { /* fall through */ }
   }
 
-  // If all providers failed or no API keys are supplied, produce an informative response
+  // Fallback
   const lastUserMsg = options.messages.filter((m) => m.role === 'user').pop()?.content || '';
+  yield `[AsLynx AI System Response - Offline Fallback]\n\nReceived your query: "${lastUserMsg.slice(0, 100)}${lastUserMsg.length > 100 ? '...' : ''}".\n\nTo enable live generation with Gemini, OpenRouter, or Groq, configure GEMINI_API_KEY, OPENROUTER_API_KEY, or GROQ_API_KEY in your environment.`;
+}
+
+export async function callAIProvider(options: AIRequestOptions): Promise<AIResponse> {
+  const startTime = Date.now();
+  const chunks: string[] = [];
+  const hasKey = (name: string) => Boolean(process.env[`${name}_API_KEY`]);
+  const meta = detectProvider(options, hasKey);
+
+  try {
+    for await (const chunk of streamAIProvider(options)) {
+      chunks.push(chunk);
+    }
+  } catch {
+    // streamAIProvider handles its own fallback yields.
+  }
+
+  const text = chunks.join('');
+  const isFallback = text.startsWith('[AsLynx AI System Response');
+
   return {
-    text: `[AsLynx AI System Response - Offline Fallback]\n\nReceived your query: "${lastUserMsg.slice(0, 100)}${lastUserMsg.length > 100 ? '...' : ''}".\n\nTo enable live generation with OpenRouter, Groq, or Gemini, configure GEMINI_API_KEY, OPENROUTER_API_KEY, or GROQ_API_KEY in your environment.\n\nErrors encountered:\n${errors.join('\n') || 'No external provider keys active.'}`,
-    provider: 'Local Fallback Engine',
-    model: 'aslynx-rule-fallback',
-    latencyMs: Date.now() - startTime
+    text,
+    provider: meta?.provider || 'Local Fallback Engine',
+    model: meta?.model || 'aslynx-rule-fallback',
+    latencyMs: Date.now() - startTime,
+    fallback: isFallback
   };
 }

@@ -15,8 +15,10 @@ export const metadata: Metadata = {
     title: 'AsLynx — AI Prompt Engineer & Minecraft Bedrock Modder',
     description: 'Explore high-performance Minecraft Bedrock add-ons, AI prompt engineering frameworks, and 12+ public developer utilities.',
     type: 'website',
-    url: 'https://aslynx.dev'
+    url: 'https://aslynx.dev',
+    images: [{ url: '/icon.svg', width: 32, height: 32 }]
   },
+  icons: { icon: '/icon.svg' },
   twitter: {
     card: 'summary_large_image',
     title: 'AsLynx — AI Prompt Engineer & Minecraft Bedrock Modder',

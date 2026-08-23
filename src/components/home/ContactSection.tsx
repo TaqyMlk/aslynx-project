@@ -8,6 +8,8 @@ import { Mail, Send, Check, Copy, MessageSquare, Sparkles, Flame, Github } from 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
 
   const email = 'admin@aslynx.store';
@@ -20,8 +22,10 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) return;
-    
+    if (!formState.name || !formState.email || !formState.message || sending) return;
+    setSending(true);
+    setError(null);
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -29,10 +33,12 @@ export default function ContactSection() {
         body: JSON.stringify(formState)
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to send');
+      if (!res.ok) throw new Error(data.error || 'Failed to send your message.');
       setSent(true);
-    } catch (error) {
-      console.error('Contact form error:', error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send your message. Please retry.');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -106,7 +112,7 @@ export default function ContactSection() {
                 href={s.url}
                 target="_blank"
                 rel="noreferrer"
-                className="glass-panel hover:glass-panel-elevated p-4 rounded-2xl border-white/5 hover:border-white/15 transition-all group"
+                className="bg-white/[0.03] hover:bg-white/[0.06] p-4 rounded-2xl border-white/5 hover:border-white/15 transition-all group"
               >
                 <div className="mb-2 group-hover:scale-110 transition-transform">{getSocialIcon(s.name)}</div>
                 <h4 className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors">{s.name}</h4>
@@ -139,11 +145,18 @@ export default function ContactSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div role="alert" className="px-3 py-2 rounded-xl border border-rose-400/20 bg-rose-400/5 text-xs text-rose-200">
+                  {error}
+                </div>
+              )}
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Your Name</label>
+                <label htmlFor="contact-name" className="block text-xs font-medium text-zinc-300 mb-1.5">Your Name</label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
+                  autoComplete="name"
                   placeholder="e.g. Alex Rivers"
                   value={formState.name}
                   onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -152,10 +165,12 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Email Address</label>
+                <label htmlFor="contact-email" className="block text-xs font-medium text-zinc-300 mb-1.5">Email Address</label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
+                  autoComplete="email"
                   placeholder="alex@example.com"
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -164,10 +179,12 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1.5">Message / Inquiry</label>
+                <label htmlFor="contact-message" className="block text-xs font-medium text-zinc-300 mb-1.5">Message / Inquiry</label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   required
+                  maxLength={4000}
                   placeholder="Tell me about your project, idea, or questions..."
                   value={formState.message}
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
@@ -177,10 +194,11 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold text-xs sm:text-sm shadow-lg shadow-cyan-500/20 transition-all active:scale-95"
+                disabled={sending}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 disabled:opacity-50 disabled:pointer-events-none text-black font-semibold text-xs sm:text-sm transition-all active:scale-[0.98]"
               >
                 <Send className="w-4 h-4" />
-                <span>Send Message</span>
+                <span>{sending ? 'Sending…' : 'Send Message'}</span>
               </button>
             </form>
           )}

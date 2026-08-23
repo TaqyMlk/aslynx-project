@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="w-full flex flex-col gap-4 sm:gap-8 pt-16">
+      <h1 className="sr-only">About — Muhammad Abdulhadi Taqy (AsLynx)</h1>
       <AboutSection />
       <FieldsSection />
       <SkillsSection />

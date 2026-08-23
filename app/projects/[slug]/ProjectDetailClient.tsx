@@ -127,7 +127,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
               href={project.curseForgeUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-xs sm:text-sm transition-all active:scale-95"
             >
               <Flame className="w-4 h-4 text-black" />
               <span>Download on CurseForge</span>
@@ -139,7 +139,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-panel hover:glass-panel-elevated border border-white/10 hover:border-white/20 text-white font-medium text-xs sm:text-sm transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-panel hover-surface border border-white/10 hover:border-white/20 text-white font-medium text-xs sm:text-sm transition-all"
             >
               <Github className="w-4 h-4" />
               <span>View Source on GitHub</span>
@@ -151,7 +151,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-panel hover:glass-panel-elevated border border-white/10 hover:border-white/20 text-white font-medium text-xs sm:text-sm transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-panel hover-surface border border-white/10 hover:border-white/20 text-white font-medium text-xs sm:text-sm transition-all"
             >
               <ExternalLink className="w-4 h-4" />
               <span>Live Demonstration</span>

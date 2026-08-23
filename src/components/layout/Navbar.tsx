@@ -184,7 +184,7 @@ export default function Navbar() {
 
       {searchOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center px-3 sm:px-4 pt-[10vh] sm:pt-[14vh]">
-          <button type="button" aria-label="Close search" onClick={closeSearch} className="absolute inset-0 bg-black/75 backdrop-blur-sm cursor-default" />
+          <button type="button" aria-label="Close search" onClick={closeSearch} className="absolute inset-0 bg-black/80 cursor-default" />
           <motion.div
             role="dialog"
             aria-modal="true"

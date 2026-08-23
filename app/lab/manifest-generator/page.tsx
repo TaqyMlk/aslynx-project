@@ -112,12 +112,13 @@ export default function ManifestGeneratorPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Settings Form (Left 5 cols) */}
-        <div className="lg:col-span-5 glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-4">
+        <div className="lg:col-span-5 bg-[#12141c] p-6 rounded-3xl border border-white/10 space-y-4">
           <h3 className="text-base font-bold text-white mb-2">Pack Configuration</h3>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1">Pack Name</label>
+            <label htmlFor="pack-name" className="block text-xs font-medium text-zinc-300 mb-1">Pack Name</label>
             <input
+              id="pack-name"
               type="text"
               value={packName}
               onChange={(e) => setPackName(e.target.value)}
@@ -126,8 +127,9 @@ export default function ManifestGeneratorPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1">Description</label>
+            <label htmlFor="pack-desc" className="block text-xs font-medium text-zinc-300 mb-1">Description</label>
             <input
+              id="pack-desc"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -137,8 +139,9 @@ export default function ManifestGeneratorPage() {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Pack Type</label>
+              <label htmlFor="pack-type" className="block text-xs font-medium text-zinc-300 mb-1">Pack Type</label>
               <select
+                id="pack-type"
                 value={packType}
                 onChange={(e) => setPackType(e.target.value as 'behavior' | 'resource')}
                 className="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-xs focus:outline-none focus:border-cyan-400 cursor-pointer"
@@ -149,8 +152,9 @@ export default function ManifestGeneratorPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Min Engine</label>
+              <label htmlFor="min-engine" className="block text-xs font-medium text-zinc-300 mb-1">Min Engine</label>
               <input
+                id="min-engine"
                 type="text"
                 value={minEngineVersion}
                 onChange={(e) => setMinEngineVersion(e.target.value)}
@@ -174,8 +178,9 @@ export default function ManifestGeneratorPage() {
 
               {enableScriptAPI && (
                 <div>
-                  <label className="block text-[11px] text-zinc-400 mb-1">Script Entry Point</label>
+                  <label htmlFor="script-entry" className="block text-[11px] text-zinc-400 mb-1">Script Entry Point</label>
                   <input
+                    id="script-entry"
                     type="text"
                     value={scriptEntry}
                     onChange={(e) => setScriptEntry(e.target.value)}
@@ -189,7 +194,7 @@ export default function ManifestGeneratorPage() {
           <div className="pt-2">
             <button
               onClick={regenerateUUIDs}
-              className="w-full py-2.5 rounded-xl glass-panel hover:glass-panel-elevated border border-white/10 text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center justify-center gap-2 transition-all active:scale-95"
+              className="w-full py-2.5 rounded-xl glass-panel hover-surface border border-white/10 text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center justify-center gap-2 transition-all active:scale-95"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Regenerate UUIDs (v4)</span>
@@ -216,7 +221,7 @@ export default function ManifestGeneratorPage() {
 
               <button
                 onClick={handleDownload}
-                className="px-3 py-1 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black text-xs font-semibold transition-all flex items-center gap-1 active:scale-95"
+                className="px-3 py-1 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black text-xs font-semibold transition-all flex items-center gap-1 active:scale-95"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download</span>

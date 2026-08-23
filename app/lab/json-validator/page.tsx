@@ -90,7 +90,7 @@ export default function JSONValidatorPage() {
 
           <button
             onClick={() => validateAndFormat(true)}
-            className="px-3.5 py-1.5 rounded-xl glass-panel hover:glass-panel-elevated border border-white/10 text-zinc-300 text-xs font-medium transition-all flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-xl glass-panel hover-surface border border-white/10 text-zinc-300 text-xs font-medium transition-all flex items-center gap-1.5"
           >
             <Minimize2 className="w-3.5 h-3.5" />
             <span>Minify (Compact)</span>

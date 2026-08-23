@@ -7,6 +7,10 @@ import { AgentMessage } from '@/src/types';
 
 export const dynamic = 'force-dynamic';
 
+function normalizeProvider(value: unknown): 'auto' | 'gemini' | 'openrouter' | 'groq' {
+  return value === 'gemini' || value === 'openrouter' || value === 'groq' ? value : 'auto';
+}
+
 export async function GET(req: NextRequest) {
   try {
     const sessionId = new URL(req.url).searchParams.get('sessionId') || 'default-session';
@@ -23,47 +27,107 @@ export async function DELETE(req: NextRequest) {
     await saveMessages(sessionId, []);
     return NextResponse.json({ success: true, sessionId });
   } catch (err: unknown) {
-    return NextResponse.json({ error: 'Agent memory clear failed', details: err instanceof Error ? err.message : String(err) }, { status: 500 });
+    return NextResponse.json({ error: 'Conversation clear failed', details: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { sessionId = 'default-session', message, mode = 'general' } = body;
-    if (!message || typeof message !== 'string') return NextResponse.json({ error: 'Message content is required.' }, { status: 400 });
+    const {
+      sessionId = 'default-session',
+      message,
+      mode = 'general',
+      provider = 'auto'
+    } = body;
 
+    if (!message || typeof message !== 'string') {
+      return NextResponse.json({ error: 'Message content is required.' }, { status: 400 });
+    }
+
+    const preferredProvider = normalizeProvider(provider);
     const history = await getMessages(sessionId);
     const facts = await getFacts();
-    const userMessage: AgentMessage = { id: `msg_${Date.now()}_user`, role: 'user', content: message, timestamp: Date.now() };
+    const userMessage: AgentMessage = {
+      id: `msg_${Date.now()}_user`,
+      role: 'user',
+      content: message.trim(),
+      timestamp: Date.now()
+    };
     history.push(userMessage);
 
-    const factsContext = facts.slice(0, 8).map((f) => `- [${f.category} / ${f.key}]: ${f.value}`).join('\n');
-    const systemPrompt = `You are AsLynx Personal AI Agent, a capable personal developer assistant with persistent memory and tools.\n\nLong-term Memory Context:\n${factsContext || 'No stored facts yet.'}\n\nUse the available context accurately. Never claim a tool was used unless it actually was.`;
-    const recentHistory = history.slice(-10).map((m) => ({ role: m.role as 'user' | 'assistant' | 'system', content: m.content }));
+    const factsContext = facts
+      .slice(0, 8)
+      .map((f) => `- [${f.category} / ${f.key}]: ${f.value}`)
+      .join('\n');
+
+    const systemPrompt = `You are AsLynx Personal AI Agent, a capable personal developer assistant with persistent memory and tools.
+
+Long-term Memory Context:
+${factsContext || 'No stored facts yet.'}
+
+Use the available context accurately. Never claim a tool was used unless it actually was. If the user asks for current information and no live-search result is provided, say that live search is unavailable rather than inventing current facts.`;
+
+    const recentHistory = history
+      .slice(-12)
+      .map((m) => ({ role: m.role as 'user' | 'assistant' | 'system', content: m.content }));
 
     const toolCallsExecuted: { name: string; args: Record<string, unknown>; result?: unknown }[] = [];
     const lower = message.toLowerCase();
-    if (lower.includes('jam berapa') || lower.includes('tanggal berapa') || lower.includes('hari apa') || lower.includes('what time') || lower.includes('what date') || lower.includes('sekarang')) {
+
+    if (
+      lower.includes('jam berapa') ||
+      lower.includes('tanggal berapa') ||
+      lower.includes('hari apa') ||
+      lower.includes('what time') ||
+      lower.includes('what date') ||
+      lower.includes('sekarang')
+    ) {
       const args = { timezone: 'Asia/Jakarta' };
       toolCallsExecuted.push({ name: 'current_datetime', args, result: await executeTool('current_datetime', args) });
     }
+
     if (lower.startsWith('ingat:') || lower.startsWith('remember:') || lower.includes('simpan fakta:')) {
       const factText = message.replace(/^(ingat:|remember:|simpan fakta:)/i, '').trim();
-      const args = { key: `user_fact_${Date.now()}`, value: factText, tags: ['user_note'] };
-      toolCallsExecuted.push({ name: 'remember_fact', args, result: await executeTool('remember_fact', args) });
+      if (factText) {
+        const args = { key: `user_fact_${Date.now()}`, value: factText, tags: ['user_note'] };
+        toolCallsExecuted.push({ name: 'remember_fact', args, result: await executeTool('remember_fact', args) });
+      }
     }
 
-    const aiRes = await callAIProvider({ messages: recentHistory, systemPrompt, mode: mode === 'coding' ? 'coding' : 'general', temperature: 0.7 });
+    const aiRes = await callAIProvider({
+      messages: recentHistory,
+      systemPrompt,
+      mode: mode === 'coding' ? 'coding' : 'general',
+      temperature: 0.7,
+      preferredProvider
+    });
+
     await recordUsage(500);
+
     const assistantMessage: AgentMessage = {
-      id: `msg_${Date.now()}_assistant`, role: 'assistant', content: aiRes.text, timestamp: Date.now(),
-      provider: aiRes.provider, modelUsed: aiRes.model, latencyMs: aiRes.latencyMs,
+      id: `msg_${Date.now()}_assistant`,
+      role: 'assistant',
+      content: aiRes.text,
+      timestamp: Date.now(),
+      provider: aiRes.provider,
+      modelUsed: aiRes.model,
+      latencyMs: aiRes.latencyMs,
       toolCalls: toolCallsExecuted.length ? toolCallsExecuted : undefined
     };
+
     history.push(assistantMessage);
     await saveMessages(sessionId, history);
-    return NextResponse.json({ message: assistantMessage, history, sessionId });
+
+    return NextResponse.json({
+      message: assistantMessage,
+      history,
+      sessionId,
+      provider: aiRes.provider,
+      model: aiRes.model,
+      latencyMs: aiRes.latencyMs,
+      toolsUsed: toolCallsExecuted.map((tool) => tool.name)
+    });
   } catch (err: unknown) {
     return NextResponse.json({ error: 'Agent chat error', details: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }

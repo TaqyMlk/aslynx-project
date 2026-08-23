@@ -8,19 +8,19 @@ import FeaturedProjects from '@/src/components/home/FeaturedProjects';
 import ContactSection from '@/src/components/home/ContactSection';
 import { fetchCurseForgeStats } from '@/src/server/curseforge/client';
 
-export const revalidate = 900; // 15 minutes ISR
+export const revalidate = 900;
 
 export default async function HomePage() {
   const stats = await fetchCurseForgeStats().catch(() => ({ totalDownloads: 350000 }));
 
   return (
-    <div className="w-full flex flex-col gap-4 sm:gap-8">
+    <div className="w-full flex flex-col gap-8 sm:gap-12">
       <Hero totalDownloads={stats.totalDownloads} />
+      <FeaturedProjects />
       <AboutSection />
       <FieldsSection />
       <SkillsSection />
       <ExperienceSection />
-      <FeaturedProjects />
       <ContactSection />
     </div>
   );

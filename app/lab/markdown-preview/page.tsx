@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
 import { FileText, Copy, Check, Download } from 'lucide-react';
 import { marked } from 'marked';
-import DOMPurify from 'dompurify';
 
 const STARTER_MD = `# Lynx Quality Tools — Documentation
 
@@ -29,14 +28,28 @@ cp -r lynx_behavior_pack/ com.mojang/behavior_packs/
 export default function MarkdownPreviewPage() {
   const [markdown, setMarkdown] = useState(STARTER_MD);
   const [copied, setCopied] = useState(false);
+  const [sanitizedHtml, setSanitizedHtml] = useState('');
 
-  const renderHtml = () => {
-    const rawHtml = marked.parse(markdown, { async: false, gfm: true }) as string;
-    if (typeof DOMPurify !== 'undefined') {
-      return DOMPurify.sanitize(rawHtml);
-    }
-    return rawHtml;
-  };
+  const rawHtml = useMemo(
+    () => marked.parse(markdown, { async: false, gfm: true }) as string,
+    [markdown]
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    // DOMPurify is browser-only. Load it after hydration so Next.js never
+    // executes DOMPurify.sanitize during server-side prerendering.
+    import('dompurify').then(({ default: DOMPurify }) => {
+      if (active && typeof DOMPurify?.sanitize === 'function') {
+        setSanitizedHtml(DOMPurify.sanitize(rawHtml));
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [rawHtml]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(markdown);
@@ -66,7 +79,6 @@ export default function MarkdownPreviewPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch mb-6">
-        {/* Markdown Source Pane */}
         <div className="glass-panel-elevated p-5 rounded-3xl border-white/10 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-xs">
             <span className="font-semibold text-zinc-300 flex items-center gap-1.5">
@@ -84,7 +96,6 @@ export default function MarkdownPreviewPage() {
           />
         </div>
 
-        {/* Live Formatted Preview Pane */}
         <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-xs">
             <span className="font-semibold text-zinc-300">Rendered Typography</span>
@@ -98,8 +109,8 @@ export default function MarkdownPreviewPage() {
           </div>
 
           <div
-              className="flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 leading-relaxed space-y-3 prose prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: renderHtml() }}
+            className="flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 leading-relaxed space-y-3 prose prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         </div>
       </div>

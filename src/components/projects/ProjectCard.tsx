@@ -26,17 +26,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     : null;
 
   return (
-    <div className="glass-panel hover:glass-panel-elevated p-6 rounded-3xl border-white/5 hover:border-white/15 flex flex-col justify-between transition-all duration-300 group h-full">
+    <div className="bg-[#12141c] hover:bg-[#181b25] p-6 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between transition-colors group h-full">
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-4">
-          <span
-            className={`text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-lg border ${
-              categoryBadgeColor[project.category] || categoryBadgeColor.other
-            }`}
-          >
-            {project.category}
-          </span>
+<span className={`px-2 py-0.5 rounded-lg border ${
+                categoryBadgeColor[project.category] || categoryBadgeColor.other
+              }`}>
+              {project.category}
+            </span>
 
           {formattedDownloads && (
             <div className="flex items-center gap-1 text-xs font-semibold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-lg border border-cyan-500/20">

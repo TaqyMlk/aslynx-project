@@ -125,7 +125,7 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-3 sm:py-4 transition-all duration-300">
         <nav
           className={`w-full max-w-5xl flex items-center justify-between px-4 sm:px-6 py-2.5 rounded-2xl transition-all duration-300 ${
-            scrolled ? 'glass-panel-elevated shadow-2xl border-white/10' : 'glass-panel border-white/5 shadow-lg'
+            scrolled ? 'bg-[#12141c] border border-white/10' : 'bg-[#0e1017] border border-white/5'
           }`}
         >
           <Link href="/" className="flex items-center gap-2.5 group">

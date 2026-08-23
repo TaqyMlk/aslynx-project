@@ -11,8 +11,9 @@ export default function FieldsSection() {
       id: 'ai',
       title: 'AI & Automation',
       icon: Sparkles,
-      color: 'from-purple-500/20 to-blue-500/20 text-purple-400',
-      border: 'border-purple-500/20',
+      iconBg: 'bg-purple-500/10',
+      iconColor: 'text-purple-400',
+      iconBorder: 'border-purple-500/20',
       desc: 'System prompt architecture, multi-agent pipelines with tool execution loops, context token optimization, and intelligent provider routing.',
       points: ['Prompt Engineering & Schema Validation', 'Multi-Agent Loops with Memory & Tools', 'Provider Routing (Gemini, OpenRouter, Groq)', 'Context Token Budget Optimization'],
       link: '/lab/ai-lite',
@@ -22,8 +23,9 @@ export default function FieldsSection() {
       id: 'minecraft',
       title: 'Minecraft Bedrock Modding',
       icon: Box,
-      color: 'from-cyan-500/20 to-emerald-500/20 text-cyan-400',
-      border: 'border-cyan-500/20',
+      iconBg: 'bg-cyan-500/10',
+      iconColor: 'text-cyan-400',
+      iconBorder: 'border-cyan-500/20',
       desc: 'Official @minecraft/server Script API add-on engineering, custom gameplay systems, zero-lag vein mining, and interactive modal forms.',
       points: ['Bedrock Script API (@minecraft/server)', 'Zero-Lag Vein Mining & Treecapitator Algorithms', 'Realms & BDS Multiplayer Performance Tuning', '350,000+ CurseForge Player Community'],
       link: '/projects',
@@ -33,8 +35,9 @@ export default function FieldsSection() {
       id: 'web',
       title: 'Modern Web Development',
       icon: Layout,
-      color: 'from-blue-500/20 to-indigo-500/20 text-blue-400',
-      border: 'border-blue-500/20',
+      iconBg: 'bg-blue-500/10',
+      iconColor: 'text-blue-400',
+      iconBorder: 'border-blue-500/20',
       desc: 'Full-stack Next.js App Router applications, iOS-inspired Dark Matte Glossy Glass design systems, TypeScript type safety, and interactive utility workspaces.',
       points: ['Next.js 15+ App Router & Server Components', 'React 19 & Strict TypeScript Type Safety', 'Dark Matte Glossy Glass Design System', '12+ Interactive Browser Utilities & Sandbox'],
       link: '/lab',
@@ -66,11 +69,11 @@ export default function FieldsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-panel hover:glass-panel-elevated p-6 sm:p-7 rounded-3xl border-white/5 hover:border-white/15 flex flex-col justify-between transition-all duration-300 group"
+              className="bg-[#12141c] hover:bg-[#181b25] p-6 sm:p-7 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between transition-colors group"
             >
               <div>
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${field.color} border border-white/10 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform`}>
-                  <Icon className="w-6 h-6" />
+                <div className={`w-12 h-12 rounded-xl ${field.iconBg} border ${field.iconBorder} flex items-center justify-center mb-5 group-hover:scale-105 transition-transform`}>
+                  <Icon className={`w-6 h-6 ${field.iconColor}`} />
                 </div>
 
                 <h3 className="text-lg font-bold text-white mb-2">{field.title}</h3>

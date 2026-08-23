@@ -70,7 +70,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link
       href={`/lab/${tool.slug}`}
-      className="glass-panel hover:glass-panel-elevated p-6 rounded-3xl border-white/5 hover:border-white/15 flex flex-col justify-between transition-all duration-300 group h-full"
+      className="bg-[#12141c] hover:bg-[#181b25] p-6 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between transition-colors group h-full"
     >
       <div>
         <div className="flex items-center justify-between gap-2 mb-4">
@@ -79,13 +79,11 @@ export default function ToolCard({ tool }: ToolCardProps) {
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span
-              className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-lg border ${
+            <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
                 categoryColor[tool.category] || categoryColor.utility
-              }`}
-            >
-              {tool.category}
-            </span>
+              }`}>
+                {tool.category}
+              </span>
             {tool.badge && (
               <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/5 text-zinc-300 border border-white/5">
                 {tool.badge}

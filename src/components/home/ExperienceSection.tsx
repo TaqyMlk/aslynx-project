@@ -29,11 +29,11 @@ export default function ExperienceSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="glass-panel hover:glass-panel-elevated p-6 sm:p-8 rounded-3xl border-white/5 hover:border-white/15 transition-all duration-300 relative overflow-hidden"
+            className="bg-[#12141c] hover:bg-[#181b25] p-6 sm:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors relative overflow-hidden"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
               <div>
-                <span className="inline-block px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-semibold mb-2">
+                <span className="inline-block px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-xs font-semibold mb-2">
                   {exp.badge}
                 </span>
                 <h3 className="text-xl font-bold text-white tracking-tight">{exp.role}</h3>

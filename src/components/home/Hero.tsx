@@ -35,7 +35,7 @@ export default function Hero({ totalDownloads }: HeroProps) {
         className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] mb-6"
       >
         Engineering Next-Gen{' '}
-        <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+        <span className="text-cyan-400">
           AI Workflows
         </span>{' '}
         & Minecraft Bedrock Systems
@@ -76,42 +76,34 @@ export default function Hero({ totalDownloads }: HeroProps) {
         </Link>
       </motion.div>
 
-      {/* Live Highlights / Metrics Grid */}
+      {/* Live Highlights / Metrics — horizontal segmented layout */}
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-4xl"
+        className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 w-full max-w-3xl text-xs sm:text-sm"
       >
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center text-center border-white/5">
-          <div className="flex items-center gap-1.5 text-cyan-400 font-bold text-xl sm:text-2xl mb-1">
-            <Flame className="w-5 h-5" />
-            <span>{formattedDownloads}</span>
-          </div>
-          <span className="text-xs text-zinc-400 font-medium">CurseForge Downloads</span>
+        <div className="flex items-center gap-2 text-zinc-400">
+          <Flame className="w-4 h-4 text-cyan-400" />
+          <span className="text-white font-semibold">{formattedDownloads}</span>
+          <span>CurseForge Downloads</span>
         </div>
-
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center text-center border-white/5">
-          <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xl sm:text-2xl mb-1">
-            <Box className="w-5 h-5" />
-            <span>8+</span>
-          </div>
-          <span className="text-xs text-zinc-400 font-medium">Add-ons Released</span>
+        <div className="hidden sm:block w-px h-4 bg-white/10" />
+        <div className="flex items-center gap-2 text-zinc-400">
+          <Box className="w-4 h-4 text-blue-400" />
+          <span className="text-white font-semibold">8+</span>
+          <span>Add-ons Released</span>
         </div>
-
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center text-center border-white/5">
-          <div className="flex items-center gap-1.5 text-purple-400 font-bold text-xl sm:text-2xl mb-1">
-            <span>12+</span>
-          </div>
-          <span className="text-xs text-zinc-400 font-medium">Public Lab Tools</span>
+        <div className="hidden sm:block w-px h-4 bg-white/10" />
+        <div className="flex items-center gap-2 text-zinc-400">
+          <span className="text-white font-semibold">12+</span>
+          <span>Public Lab Tools</span>
         </div>
-
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center text-center border-white/5">
-          <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xl sm:text-2xl mb-1">
-            <Code2 className="w-5 h-5" />
-            <span>100%</span>
-          </div>
-          <span className="text-xs text-zinc-400 font-medium">Zero-Lag Scripting</span>
+        <div className="hidden sm:block w-px h-4 bg-white/10" />
+        <div className="flex items-center gap-2 text-zinc-400">
+          <Code2 className="w-4 h-4 text-emerald-400" />
+          <span className="text-white font-semibold">60fps</span>
+          <span>Zero-Lag Scripting</span>
         </div>
       </motion.div>
     </section>

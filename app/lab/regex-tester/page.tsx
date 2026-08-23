@@ -63,7 +63,7 @@ export default function RegexTesterPage() {
       />
 
       {/* Pattern Input & Flags */}
-      <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 mb-6 space-y-4">
+      <div className="bg-[#12141c] p-6 rounded-2xl border border-white/10 mb-6 space-y-4">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="flex-1 w-full relative">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-zinc-500 text-sm">/</span>

@@ -60,15 +60,15 @@ export default function SkillsSection() {
         {currentCategory.skills.map((skill, idx) => (
           <div
             key={idx}
-            className={`glass-panel p-5 rounded-2xl border transition-all duration-200 ${
-              skill.highlight ? 'border-cyan-500/20 bg-zinc-900/60' : 'border-white/5'
+            className={`bg-[#12141c] hover:bg-[#181b25] p-5 rounded-2xl border transition-colors ${
+              skill.highlight ? 'border-cyan-500/15' : 'border-white/5'
             }`}
           >
             <div className="flex items-center justify-between gap-2 mb-2">
               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                 <span>{skill.name}</span>
                 {skill.highlight && (
-                  <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 text-[10px] font-semibold">
+                  <span className="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-[10px] font-semibold">
                     Core
                   </span>
                 )}

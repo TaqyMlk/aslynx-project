@@ -54,7 +54,7 @@ export default function AILitePage() {
       <section className="mb-5">
         <div className="flex items-center gap-2 mb-2 text-[11px] uppercase tracking-wider text-zinc-500"><Zap className="w-3 h-3" /> Quick start</div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-          {presets.map(([title, text]) => <button key={title} onClick={() => { setPrompt(text); handleSend(text); }} className="glass-panel rounded-xl border-white/5 hover:border-cyan-400/20 p-3 text-left transition min-h-[72px]"><span className="block text-xs font-semibold text-zinc-200">{title}</span><span className="block mt-1 text-[10px] text-zinc-500 line-clamp-2">{text}</span></button>)}
+          {presets.map(([title, text]) => <button key={title} onClick={() => { setPrompt(text); handleSend(text); }} className="bg-[#12141c] hover:bg-[#181b25] rounded-xl border border-white/5 hover:border-white/10 p-3 text-left transition min-h-[72px]"><span className="block text-xs font-semibold text-zinc-200">{title}</span><span className="block mt-1 text-[10px] text-zinc-500 line-clamp-2">{text}</span></button>)}
         </div>
       </section>
 
@@ -63,7 +63,7 @@ export default function AILitePage() {
         <div className="flex items-center justify-between border-t border-white/5 pt-2 mt-2"><span className="text-[10px] text-zinc-600">{prompt.length} chars · Stateless</span><button onClick={() => handleSend()} disabled={loading || !prompt.trim()} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black text-xs font-bold disabled:opacity-40">{loading ? <Sparkles className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />} {loading ? 'Thinking' : 'Send'}</button></div>
       </section>
 
-      {response && <section className="mt-5 glass-panel-elevated rounded-2xl border-white/10 overflow-hidden">
+      {response && <section className="mt-5 bg-[#12141c] rounded-2xl border border-white/10 overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-white/5 bg-black/10">
           <div className="flex items-center gap-2 text-[10px] text-zinc-400"><ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /><span className="text-zinc-200">Response</span>{telemetry && <><span>·</span><span>{telemetry.provider} / {telemetry.model}</span><Gauge className="w-3 h-3" /><span>{telemetry.latencyMs}ms</span></>}</div>
           <button onClick={copy} className="flex items-center gap-1.5 text-[10px] text-zinc-400 hover:text-white">{copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}{copied ? 'Copied' : 'Copy'}</button>

@@ -29,9 +29,9 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="w-full md:w-5/12 glass-panel-elevated p-6 sm:p-8 rounded-3xl border-white/10 relative overflow-hidden"
+          className="bg-[#0e1017] p-6 sm:p-8 rounded-2xl border border-white/10 relative overflow-hidden"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500/20 via-blue-500/20 to-purple-500/20 border border-white/15 flex items-center justify-center text-cyan-400 mb-6">
+          <div className="w-16 h-16 rounded-xl bg-cyan-500/10 border border-white/10 flex items-center justify-center text-cyan-400 mb-6">
             <User className="w-8 h-8" />
           </div>
 
@@ -78,7 +78,7 @@ export default function AboutSection() {
 
           <div className="space-y-4">
             {philosophies.map((item, idx) => (
-              <div key={idx} className="glass-panel p-5 rounded-2xl border-white/5 flex gap-4 items-start">
+              <div key={idx} className="bg-[#12141c] hover:bg-[#181b25] p-5 rounded-2xl border border-white/5 flex gap-4 items-start transition-colors">
                 <div className="w-6 h-6 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>

@@ -58,7 +58,7 @@ export default function ColorPalettePage() {
         description="Generate mathematical color harmonies (Analogous, Complementary, Triadic) and test dark background contrast ratios."
       />
 
-      <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-[#12141c] p-6 rounded-2xl border border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <input
             type="color"

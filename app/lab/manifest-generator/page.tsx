@@ -5,11 +5,7 @@ import ToolHeader from '@/src/components/lab/ToolHeader';
 import { RefreshCw, Copy, Check, Download, FileJson, Sparkles } from 'lucide-react';
 
 function generateUUID(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
+  return crypto.randomUUID();
 }
 
 export default function ManifestGeneratorPage() {
@@ -171,7 +167,7 @@ export default function ManifestGeneratorPage() {
                   type="checkbox"
                   checked={enableScriptAPI}
                   onChange={(e) => setEnableScriptAPI(e.target.checked)}
-                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-0"
+                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-2 focus:ring-cyan-400/50"
                 />
                 <span>Include Bedrock Script API Module</span>
               </label>

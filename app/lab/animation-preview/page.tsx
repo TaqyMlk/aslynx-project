@@ -101,7 +101,7 @@ export default function AnimationPreviewPage() {
             </div>
           </div>
 
-          <style jsx>{`
+          <style>{`
             @keyframes bounceExample {
               0% {
                 transform: scale(0.6) rotate(-15deg) translateY(20px);

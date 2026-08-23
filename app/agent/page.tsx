@@ -167,7 +167,7 @@ export default function AgentPage() {
           )}
 
           <div className="shrink-0 px-3 sm:px-5 py-2 border-b border-white/5 flex items-center gap-2 overflow-x-auto scrollbar-none">
-            <div className="relative shrink-0"><Settings2 className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-cyan-400 pointer-events-none" /><select value={provider} onChange={(event) => setProvider(event.target.value)} className="h-8 pl-7 pr-7 rounded-lg bg-white/5 border border-white/10 text-[10px] text-zinc-300 focus:outline-none"><option value="auto">Auto Router</option><option value="gemini">Gemini</option><option value="openrouter">OpenRouter</option><option value="groq">Groq</option></select></div>
+            <div className="relative shrink-0"><Settings2 className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-cyan-400 pointer-events-none" /><select value={provider} onChange={(event) => setProvider(event.target.value)} aria-label="AI Provider" className="h-8 pl-7 pr-7 rounded-lg bg-white/5 border border-white/10 text-[10px] text-zinc-300 focus:outline-none"><option value="auto">Auto Router</option><option value="gemini">Gemini</option><option value="openrouter">OpenRouter</option><option value="groq">Groq</option></select></div>
             <span className="h-5 w-px bg-white/10 shrink-0" />
             <span className="inline-flex items-center gap-1.5 shrink-0 text-[9px] text-zinc-500"><Search className="w-3 h-3 text-cyan-400" /> Web Search</span>
             <span className="inline-flex items-center gap-1.5 shrink-0 text-[9px] text-zinc-500"><Code2 className="w-3 h-3 text-blue-400" /> Code</span>

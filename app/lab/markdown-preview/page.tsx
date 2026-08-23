@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
 import { FileText, Copy, Check, Download } from 'lucide-react';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 const STARTER_MD = `# Lynx Quality Tools — Documentation
 
@@ -27,6 +29,11 @@ cp -r lynx_behavior_pack/ com.mojang/behavior_packs/
 export default function MarkdownPreviewPage() {
   const [markdown, setMarkdown] = useState(STARTER_MD);
   const [copied, setCopied] = useState(false);
+
+  const renderHtml = () => {
+    const rawHtml = marked.parse(markdown, { async: false, gfm: true }) as string;
+    return DOMPurify.sanitize(rawHtml);
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(markdown);
@@ -87,22 +94,10 @@ export default function MarkdownPreviewPage() {
             </button>
           </div>
 
-          <div className="flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 leading-relaxed space-y-3 prose prose-invert max-w-none">
-            {/* Simple Markdown HTML parser */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: markdown
-                  .replace(/^# (.*$)/gim, '<h1 class="text-xl font-bold text-white mb-2 pb-1 border-b border-white/10">$1</h1>')
-                  .replace(/^### (.*$)/gim, '<h3 class="text-sm font-bold text-cyan-300 mt-4 mb-2">$1</h3>')
-                  .replace(/\*\*(.*?)\*\*/gim, '<strong class="text-white font-bold">$1</strong>')
-                  .replace(/\*(.*?)\*/gim, '<em class="text-zinc-300">$1</em>')
-                  .replace(/^> (.*$)/gim, '<blockquote class="border-l-2 border-cyan-400 pl-3 py-1 text-zinc-400 italic my-2 bg-white/5 rounded-r-lg">$1</blockquote>')
-                  .replace(/```([\s\S]*?)```/gim, '<pre class="bg-black/60 p-3 rounded-xl border border-white/10 font-mono text-xs text-cyan-300 my-2 overflow-x-auto"><code>$1</code></pre>')
-                  .replace(/`([^`]+)`/gim, '<code class="bg-white/10 px-1.5 py-0.5 rounded text-cyan-300 font-mono text-[11px]">$1</code>')
-                  .replace(/\n/gim, '<br/>')
-              }}
-            />
-          </div>
+          <div
+              className="flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 leading-relaxed space-y-3 prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: renderHtml() }}
+          />
         </div>
       </div>
     </div>

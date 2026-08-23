@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     }
 
     const aiRes = await callAIProvider({ messages: recentHistory, systemPrompt, mode: mode === 'coding' ? 'coding' : 'general', temperature: 0.7 });
-    recordUsage(500);
+    await recordUsage(500);
     const assistantMessage: AgentMessage = {
       id: `msg_${Date.now()}_assistant`, role: 'assistant', content: aiRes.text, timestamp: Date.now(),
       provider: aiRes.provider, modelUsed: aiRes.model, latencyMs: aiRes.latencyMs,

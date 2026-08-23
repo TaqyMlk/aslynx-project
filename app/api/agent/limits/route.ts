@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const limits = getLimitStatus();
+    const limits = await getLimitStatus();
     return NextResponse.json({
       ...limits,
       timestamp: new Date().toISOString()

@@ -76,6 +76,7 @@ export default function ProjectsClient({ initialProjects, totalDownloads }: Proj
             <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
+              aria-label="Search projects"
               placeholder="Search by project name, keywords, or technology..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

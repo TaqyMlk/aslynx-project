@@ -23,7 +23,7 @@ export default function Navbar() {
     { name: 'Home', href: '/', icon: Home },
     { name: 'Projects', href: '/projects', icon: FolderGit2 },
     { name: 'My Lab', href: '/lab', icon: FlaskConical },
-    { name: 'About', href: '/#about', icon: Box }
+    { name: 'About', href: '/about', icon: Box }
   ];
 
   const navigationResults = useMemo<SearchResult[]>(() => [
@@ -191,6 +191,7 @@ export default function Navbar() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search projects, tools, sections..."
+                aria-label="Search"
                 className="flex-1 min-w-0 bg-transparent outline-none text-sm text-white placeholder:text-zinc-500"
               />
               <button type="button" onClick={closeSearch} aria-label="Close" className="p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-white/10 transition-colors">

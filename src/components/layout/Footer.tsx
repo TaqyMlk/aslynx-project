@@ -45,12 +45,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="hover:text-cyan-400 transition-colors">
+                <Link href="/about" className="hover:text-cyan-400 transition-colors">
                   About & Skills
                 </Link>
               </li>
               <li>
-                <Link href="/#experience" className="hover:text-cyan-400 transition-colors">
+                <Link href="/about#experience" className="hover:text-cyan-400 transition-colors">
                   Experience Timeline
                 </Link>
               </li>
@@ -98,7 +98,7 @@ export default function Footer() {
                   <a
                     href={s.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                     className="hover:text-white transition-colors flex items-center justify-between group"
                   >
                     <span>{s.name}</span>

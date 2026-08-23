@@ -8,11 +8,10 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const sessionId = searchParams.get('sessionId') || 'default-session';
-    const type = searchParams.get('type') || 'all'; // 'chat' | 'facts' | 'all'
+    const type = searchParams.get('type') || 'all';
 
     const workbook = XLSX.utils.book_new();
 
-    // 1. Facts Sheet
     if (type === 'facts' || type === 'all') {
       const facts = await getFacts();
       const factsData = facts.map((f) => ({
@@ -27,7 +26,6 @@ export async function GET(req: NextRequest) {
       XLSX.utils.book_append_sheet(workbook, factsSheet, 'Memory Facts');
     }
 
-    // 2. Chat Sheet
     if (type === 'chat' || type === 'all') {
       const messages = await getMessages(sessionId);
       const chatData = messages.map((m) => ({
@@ -43,7 +41,6 @@ export async function GET(req: NextRequest) {
       XLSX.utils.book_append_sheet(workbook, chatSheet, 'Chat History');
     }
 
-    // 3. Sessions Sheet
     if (type === 'all') {
       const sessions = await getSessions();
       const sessionData = sessions.map((s) => ({

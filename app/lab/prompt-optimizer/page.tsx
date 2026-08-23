@@ -88,7 +88,7 @@ ${addChainOfThought ? '[REASONING PROCESS]: First verify state schemas, validate
                   type="checkbox"
                   checked={addChainOfThought}
                   onChange={(e) => setAddChainOfThought(e.target.checked)}
-                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-0"
+                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-2 focus:ring-cyan-400/50"
                 />
                 <span>Inject Structured Chain-of-Thought Anchor</span>
               </label>
@@ -98,7 +98,7 @@ ${addChainOfThought ? '[REASONING PROCESS]: First verify state schemas, validate
                   type="checkbox"
                   checked={enforceStrictJSON}
                   onChange={(e) => setEnforceStrictJSON(e.target.checked)}
-                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-0"
+                  className="rounded border-white/20 bg-black/40 text-cyan-400 focus:ring-2 focus:ring-cyan-400/50"
                 />
                 <span>Enforce Strict Deterministic Output Boundary</span>
               </label>

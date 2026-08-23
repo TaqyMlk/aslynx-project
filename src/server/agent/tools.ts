@@ -145,12 +145,8 @@ export async function executeTool(name: string, args: Record<string, unknown>): 
 
       return {
         query,
-        results: [
-          {
-            title: `Search Index Result for "${query}"`,
-            snippet: `Direct query response for '${query}'. Real-time search index resolved with verified technical documentation and CurseForge/Bedrock release channels.`
-          }
-        ]
+        error: 'Web search is unavailable. SERPER_API_KEY is not configured. Please contact the administrator to enable live search.',
+        unavailable: true
       };
     }
 

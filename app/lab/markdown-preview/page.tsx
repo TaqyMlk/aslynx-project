@@ -6,8 +6,6 @@ import { FileText, Copy, Check, Download } from 'lucide-react';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
-export const ssr = false;
-
 const STARTER_MD = `# Lynx Quality Tools — Documentation
 
 **Lynx Quality Tools** is an official Minecraft Bedrock add-on engineered for zero-lag survival enhancements.
@@ -34,7 +32,10 @@ export default function MarkdownPreviewPage() {
 
   const renderHtml = () => {
     const rawHtml = marked.parse(markdown, { async: false, gfm: true }) as string;
-    return DOMPurify.sanitize(rawHtml);
+    if (typeof DOMPurify !== 'undefined') {
+      return DOMPurify.sanitize(rawHtml);
+    }
+    return rawHtml;
   };
 
   const handleCopy = () => {

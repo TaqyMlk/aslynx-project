@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { Home, FolderGit2, FlaskConical, Box, Search } from 'lucide-react';
+import { Home, FolderGit2, FlaskConical, UserRound, Search } from 'lucide-react';
 
 export default function Dock() {
   const pathname = usePathname();
@@ -16,39 +16,40 @@ export default function Dock() {
   const dockItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Projects', href: '/projects', icon: FolderGit2 },
-    { name: 'My Lab', href: '/lab', icon: FlaskConical },
-    { name: 'About', href: '/#about', icon: Box }
+    { name: 'Lab', href: '/lab', icon: FlaskConical },
+    { name: 'About', href: '/about', icon: UserRound }
   ];
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-40 flex md:hidden justify-center px-3 pointer-events-none pb-[env(safe-area-inset-bottom)]">
-      <nav className="pointer-events-auto flex items-center gap-1 px-2 py-2 rounded-2xl glass-panel-elevated shadow-2xl border border-white/15 bg-zinc-950/80 backdrop-blur-xl max-w-full">
+    <div className="fixed bottom-3 left-0 right-0 z-40 flex md:hidden justify-center px-3 pointer-events-none pb-[env(safe-area-inset-bottom)]">
+      <nav aria-label="Primary mobile navigation" className="pointer-events-auto flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-[#11131a]/96 border border-white/10 shadow-[0_12px_36px_-18px_rgba(0,0,0,.9)] max-w-full">
         {dockItems.map((item) => {
           const Icon = item.icon;
-          const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href) && !item.href.includes('#');
+          const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
 
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`relative flex flex-col items-center justify-center min-w-[52px] w-[52px] h-12 rounded-xl transition-all duration-200 ${
-                isActive ? 'text-cyan-400 bg-white/10' : 'text-zinc-400 hover:text-zinc-200 active:scale-95'
+              aria-current={isActive ? 'page' : undefined}
+              className={`relative flex flex-col items-center justify-center min-w-[54px] w-[54px] h-11 rounded-xl transition-colors duration-150 ${
+                isActive ? 'text-cyan-300 bg-white/[0.07]' : 'text-zinc-500 active:text-zinc-200 active:bg-white/[0.04]'
               }`}
             >
-              <Icon className="w-5 h-5" />
-              <span className="text-[9px] font-medium mt-0.5">{item.name}</span>
-              {isActive && <motion.div layoutId="activeDockIndicator" className="absolute bottom-1 w-1 h-1 rounded-full bg-cyan-400" />}
+              <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
+              <span className="text-[10px] leading-none font-medium mt-1">{item.name}</span>
+              {isActive && <motion.div layoutId="activeDockIndicator" className="absolute bottom-0.5 w-1 h-1 rounded-full bg-cyan-300" />}
             </Link>
           );
         })}
         <button
           type="button"
           onClick={openSearch}
-          aria-label="Search"
-          className="relative flex flex-col items-center justify-center min-w-[52px] w-[52px] h-12 rounded-xl text-zinc-400 hover:text-zinc-200 hover:bg-white/5 active:scale-95 transition-all duration-200"
+          aria-label="Open site search"
+          className="relative flex flex-col items-center justify-center min-w-[54px] w-[54px] h-11 rounded-xl text-zinc-500 active:text-zinc-200 active:bg-white/[0.04] transition-colors duration-150"
         >
-          <Search className="w-5 h-5" />
-          <span className="text-[9px] font-medium mt-0.5">Search</span>
+          <Search className="w-[18px] h-[18px]" strokeWidth={1.8} />
+          <span className="text-[10px] leading-none font-medium mt-1">Search</span>
         </button>
       </nav>
     </div>

@@ -28,7 +28,7 @@ export default function AboutSection() {
 
         <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="w-full md:w-7/12 space-y-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-2"><Sparkles className="w-3.5 h-3.5" />Core Philosophy</div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2"><Sparkles className="w-3.5 h-3.5" />Core Philosophy</div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Engineering with Purpose, Craftsmanship & Depth</h2>
           </div>
           <div className="space-y-4">

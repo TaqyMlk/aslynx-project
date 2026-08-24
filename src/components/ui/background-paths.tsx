@@ -52,8 +52,10 @@ function FloatingPaths({ position }: { position: number }) {
 
 export function BackgroundPaths({
     title = "Background Paths",
+    children,
 }: {
     title?: string;
+    children?: React.ReactNode;
 }) {
     const words = title.split(" ");
 
@@ -65,6 +67,7 @@ export function BackgroundPaths({
             </div>
 
             <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
+                {children ?? (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -126,7 +129,8 @@ export function BackgroundPaths({
                         </Button>
                     </div>
                 </motion.div>
+              )}
             </div>
         </div>
-    );
-}
+      );
+    }

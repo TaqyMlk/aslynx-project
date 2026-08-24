@@ -60,13 +60,13 @@ export function BackgroundPaths({
     const words = title.split(" ");
 
     return (
-        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
-            <div className="absolute inset-0">
+        <div className="relative w-full bg-white dark:bg-neutral-950">
+            <div className="absolute inset-0 pointer-events-none">
                 <FloatingPaths position={1} />
                 <FloatingPaths position={-1} />
             </div>
 
-            <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
+            <div className="relative z-10 text-center">
                 {children ?? (
                 <motion.div
                     initial={{ opacity: 0 }}

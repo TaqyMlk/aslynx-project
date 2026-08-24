@@ -3,5 +3,5 @@
 import React from 'react';
 
 export default function BackgroundGradient() {
-  return null;
+  return <div aria-hidden="true" className="site-ambient" />;
 }

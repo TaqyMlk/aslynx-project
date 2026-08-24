@@ -98,7 +98,7 @@ export default function PlaygroundPage() {
 
       <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-6">
         {/* Canvas Container */}
-        <div className="w-full h-[480px] bg-[#090a0f] rounded-2xl border border-white/10 overflow-hidden relative shadow-2xl">
+        <div className="w-full h-[480px] bg-[#020617] rounded-2xl border border-white/10 overflow-hidden relative ">
           <canvas ref={canvasRef} className="w-full h-full block" />
         </div>
 

@@ -130,7 +130,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-0.5 bg-black/25 p-1 rounded-xl border border-white/[0.06]">
+          <div className="hidden md:flex items-center gap-0.5 bg-[#0f1219] p-1 rounded-xl border border-white/10">
             {navLinks.map((link) => {
               const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
               return (
@@ -152,7 +152,7 @@ export default function Navbar() {
       {searchOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center px-3 sm:px-4 pt-[10vh] sm:pt-[14vh]">
           <button type="button" aria-label="Close search" onClick={closeSearch} className="absolute inset-0 bg-black/80 cursor-default" />
-          <motion.div role="dialog" aria-modal="true" aria-label="Site search" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative w-full max-w-xl glass-panel-elevated rounded-2xl overflow-hidden">
+          <motion.div role="dialog" aria-modal="true" aria-label="Site search" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative w-full max-w-xl bg-[#0f1219] rounded-2xl overflow-hidden">
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/[0.07]">
               <Search className="w-4.5 h-4.5 text-neutral-300 shrink-0" />
               <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search projects, tools, pages..." aria-label="Search site" className="flex-1 min-w-0 bg-transparent outline-none text-sm text-white placeholder:text-neutral-600" />

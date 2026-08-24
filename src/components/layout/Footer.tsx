@@ -16,7 +16,7 @@ export default function Footer() {
               </div>
               <span className="font-bold text-white text-base tracking-tight">AsLynx</span>
             </div>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <p className="text-xs text-neutral-400 leading-relaxed">
               Muhammad Abdulhadi Taqy — AI Prompt Engineer, Web Developer & Minecraft Bedrock Modder with 350K+ downloads.
             </p>
             <div className="flex items-center gap-2 text-[11px] text-emerald-400">
@@ -27,8 +27,8 @@ export default function Footer() {
 
           {/* Col 2: Navigation */}
           <div>
-            <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-wider mb-3">Navigation</h4>
-            <ul className="space-y-2 text-xs text-zinc-400">
+            <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-3">Navigation</h4>
+            <ul className="space-y-2 text-xs text-neutral-400">
               <li>
                 <Link href="/" className="hover:text-cyan-400 transition-colors">
                   Home Portfolio
@@ -59,8 +59,8 @@ export default function Footer() {
 
           {/* Col 3: Popular Lab Tools */}
           <div>
-            <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-wider mb-3">Popular Lab Tools</h4>
-            <ul className="space-y-2 text-xs text-zinc-400">
+            <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-3">Popular Lab Tools</h4>
+            <ul className="space-y-2 text-xs text-neutral-400">
               <li>
                 <Link href="/lab/ai-lite" className="hover:text-cyan-400 transition-colors">
                   AI Lite (Stateless)
@@ -91,8 +91,8 @@ export default function Footer() {
 
           {/* Col 4: Connect */}
           <div>
-            <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-wider mb-3">Connect</h4>
-            <ul className="space-y-2 text-xs text-zinc-400">
+            <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider mb-3">Connect</h4>
+            <ul className="space-y-2 text-xs text-neutral-400">
               {SOCIALS.map((s) => (
                 <li key={s.name}>
                   <a
@@ -102,7 +102,7 @@ export default function Footer() {
                     className="hover:text-white transition-colors flex items-center justify-between group"
                   >
                     <span>{s.name}</span>
-                    <span className="text-[10px] text-zinc-500 group-hover:text-cyan-400">
+                    <span className="text-[10px] text-neutral-500 group-hover:text-cyan-400">
                       {s.username}
                     </span>
                   </a>
@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>© {new Date().getFullYear()} AsLynx. All rights reserved. Built with Next.js, React 19 & Tailwind CSS.</p>
           <div className="flex items-center gap-4 text-[11px]">
             <span>Fast Vercel Edge Runtime</span>

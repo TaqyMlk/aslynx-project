@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     ai: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
     tools: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
     experiments: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    other: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20'
+    other: 'bg-zinc-500/10 text-neutral-400 border-zinc-500/20'
   };
 
   const formattedDownloads = project.downloads
@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <h3 className="text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
           <Link href={`/projects/${project.slug}`}>{project.name}</Link>
         </h3>
-        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-5">
+        <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5">
           {project.tagline || project.description.en}
         </p>
 
@@ -56,7 +56,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.features && project.features.length > 0 && (
           <ul className="space-y-1.5 mb-6">
             {project.features.slice(0, 2).map((feat, idx) => (
-              <li key={idx} className="text-xs text-zinc-300 flex items-start gap-2">
+              <li key={idx} className="text-xs text-neutral-300 flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-1.5" />
                 <span className="line-clamp-1">{feat}</span>
               </li>
@@ -71,13 +71,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.technologies.slice(0, 3).map((tech, idx) => (
             <span
               key={idx}
-              className="text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-zinc-400 border border-white/5"
+              className="text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-neutral-400 border border-white/5"
             >
               {tech}
             </span>
           ))}
           {project.technologies.length > 3 && (
-            <span className="text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-zinc-500 border border-white/5">
+            <span className="text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-neutral-500 border border-white/5">
               +{project.technologies.length - 3}
             </span>
           )}
@@ -99,7 +99,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.curseForgeUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
                 title="CurseForge Page"
               >
                 <Flame className="w-4 h-4 text-cyan-400" />
@@ -110,7 +110,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
                 title="GitHub Repository"
               >
                 <Github className="w-4 h-4" />

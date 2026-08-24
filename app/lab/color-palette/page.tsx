@@ -132,7 +132,7 @@ export default function ColorPalettePage() {
     return (
       <span
         className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
-          ratioOk ? 'bg-emerald-500/15 text-emerald-400' : 'bg-zinc-500/15 text-zinc-500'
+          ratioOk ? 'bg-emerald-500/15 text-emerald-400' : 'bg-zinc-500/15 text-neutral-500'
         }`}
       >
         {level}
@@ -149,7 +149,7 @@ export default function ColorPalettePage() {
         description="Generate mathematical color harmonies (Analogous, Complementary, Triadic) with real WCAG 2.1 contrast ratios against the site's dark background."
       />
 
-      <div className="bg-[#12141c] p-6 rounded-2xl border border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <input
             type="color"
@@ -159,7 +159,7 @@ export default function ColorPalettePage() {
             className="w-14 h-14 rounded-2xl cursor-pointer bg-transparent border-0"
           />
           <div>
-            <label htmlFor="base-hex" className="text-xs text-zinc-400 block mb-0.5">Base Color HEX</label>
+            <label htmlFor="base-hex" className="text-xs text-neutral-400 block mb-0.5">Base Color HEX</label>
             <input
               id="base-hex"
               type="text"
@@ -180,7 +180,7 @@ export default function ColorPalettePage() {
           </div>
         </div>
 
-        <div className="text-xs text-zinc-400 font-mono">
+        <div className="text-xs text-neutral-400 font-mono">
           HSL: {validHex ? `${hsl.h}°, ${hsl.s}%, ${hsl.l}%` : '—'}
         </div>
       </div>
@@ -188,18 +188,18 @@ export default function ColorPalettePage() {
       {/* Palette Swatches */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-8">
         {palette.map((item, idx) => (
-          <div key={idx} className="bg-white/[0.03] hover:bg-white/[0.06] p-3 rounded-2xl border border-white/5 space-y-3 flex flex-col items-center text-center group">
+          <div key={idx} className="bg-white/[0.03] hover:bg-white/[0.06] p-3 rounded-2xl border border-white/10 space-y-3 flex flex-col items-center text-center group">
             <div
-              className="w-full h-24 rounded-xl shadow-md border border-white/10 group-hover:scale-[1.03] transition-transform"
+              className="w-full h-24 rounded-xl  border border-white/10 group-hover:scale-105 transition-transform"
               style={{ backgroundColor: item.hex }}
             />
             <div className="w-full">
-              <span className="text-[11px] text-zinc-400 font-medium block truncate">{item.label}</span>
+              <span className="text-[11px] text-neutral-400 font-medium block truncate">{item.label}</span>
               <button
                 type="button"
                 onClick={() => handleCopyColor(item.hex, idx)}
                 aria-label={`Copy ${item.label} color ${item.hex}`}
-                className="mt-1 w-full py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[10px] font-mono text-zinc-200 transition-colors flex items-center justify-center gap-1"
+                className="mt-1 w-full py-1 rounded-lg bg-white/5 hover:bg-white/15 text-[10px] font-mono text-neutral-200 transition-colors flex items-center justify-center gap-1"
               >
                 {copiedIndex === idx ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                 <span>{copiedIndex === idx ? 'Copied' : item.hex}</span>
@@ -213,13 +213,13 @@ export default function ColorPalettePage() {
       {validHex && contrastChecks.length > 0 && (
         <section aria-labelledby="wcag-heading">
           <h2 id="wcag-heading" className="text-sm font-bold text-white mb-1">WCAG 2.1 Contrast Report</h2>
-          <p className="text-xs text-zinc-500 mb-4">
+          <p className="text-xs text-neutral-500 mb-4">
             Ratios are computed against the site background (#090a0e). AA requires ≥ 4.5:1 normal text or ≥ 3:1 large text; AAA requires ≥ 7:1.
           </p>
           <div className="overflow-x-auto rounded-2xl border border-white/10">
             <table className="w-full text-xs">
               <thead>
-                <tr className="bg-white/[0.04] text-left text-zinc-400">
+                <tr className="bg-white/[0.04] text-left text-neutral-400">
                   <th scope="col" className="px-4 py-2.5 font-medium">Swatch</th>
                   <th scope="col" className="px-4 py-2.5 font-medium text-right">Ratio</th>
                   <th scope="col" className="px-4 py-2.5 font-medium">AA Normal</th>
@@ -231,12 +231,12 @@ export default function ColorPalettePage() {
               <tbody className="[&_td]:py-2.5 [&_td]:px-4 divide-y divide-white/5">
                 {contrastChecks.map((check, idx) => (
                   <tr key={idx}>
-                    <td className="font-mono text-zinc-300">{palette[idx].hex}</td>
-                    <td className="text-right font-mono tabular-nums text-zinc-200">{check.ratio.toFixed(2)}:1</td>
+                    <td className="font-mono text-neutral-300">{palette[idx].hex}</td>
+                    <td className="text-right font-mono tabular-nums text-neutral-200">{check.ratio.toFixed(2)}:1</td>
                     <td>{badge(check.aaNormal, check.aaNormal ? 'PASS' : 'FAIL')}</td>
                     <td>{badge(check.aaLarge, check.aaLarge ? 'PASS' : 'FAIL')}</td>
                     <td>{badge(check.aaaNormal, check.aaaNormal ? 'AAA' : '—')}</td>
-                    <td className="text-zinc-500">{check.onWhiteIsReadable ? 'Readable' : 'Low'}</td>
+                    <td className="text-neutral-500">{check.onWhiteIsReadable ? 'Readable' : 'Low'}</td>
                   </tr>
                 ))}
               </tbody>

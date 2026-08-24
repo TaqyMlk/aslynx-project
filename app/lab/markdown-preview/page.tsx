@@ -11,12 +11,12 @@ const STARTER_MD = `# Lynx Quality Tools — Documentation
 
 ---
 
-### 🚀 Key Capabilities
+### Key Capabilities
 * **Vein Mining**: Mines connected ore clusters in a single stroke
 * **Treecapitator**: Chops entire trees with auto-replanting
 * **QoL Utility**: Inventory sorting & quick crafting
 
-### 📦 Installation
+### Installation
 \`\`\`bash
 # Install to Minecraft Bedrock com.mojang directory
 cp -r lynx_behavior_pack/ com.mojang/behavior_packs/
@@ -38,8 +38,6 @@ export default function MarkdownPreviewPage() {
   useEffect(() => {
     let active = true;
 
-    // DOMPurify is browser-only. Load it after hydration so Next.js never
-    // executes DOMPurify.sanitize during server-side prerendering.
     import('dompurify').then(({ default: DOMPurify }) => {
       if (active && typeof DOMPurify?.sanitize === 'function') {
         setSanitizedHtml(DOMPurify.sanitize(rawHtml));
@@ -79,26 +77,26 @@ export default function MarkdownPreviewPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch mb-6">
-        <div className="glass-panel-elevated p-5 rounded-3xl border-white/10 flex flex-col h-[520px]">
+        <div className="bg-[#0f1219] p-5 rounded-3xl border border-white/10 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-xs">
-            <span className="font-semibold text-zinc-300 flex items-center gap-1.5">
+            <span className="font-semibold text-neutral-300 flex items-center gap-1.5">
               <FileText className="w-4 h-4 text-cyan-400" />
               <span>Markdown Source</span>
             </span>
-            <span className="text-[11px] text-zinc-500 font-mono">{markdown.length} chars</span>
+            <span className="text-[11px] text-neutral-500 font-mono">{markdown.length} chars</span>
           </div>
 
           <textarea
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
-            className="flex-1 w-full p-4 font-mono text-xs text-zinc-200 bg-black/50 border border-white/5 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 leading-relaxed"
+            className="flex-1 w-full p-4 font-mono text-xs text-neutral-200 bg-black/60 border border-white/5 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 leading-relaxed"
             spellCheck={false}
           />
         </div>
 
-        <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 flex flex-col h-[520px]">
+        <div className="bg-[#0f1219] p-6 rounded-3xl border border-white/10 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-xs">
-            <span className="font-semibold text-zinc-300">Rendered Typography</span>
+            <span className="font-semibold text-neutral-300">Rendered Typography</span>
             <button
               onClick={handleDownload}
               className="text-xs text-cyan-400 hover:underline flex items-center gap-1"
@@ -109,7 +107,7 @@ export default function MarkdownPreviewPage() {
           </div>
 
           <div
-            className="prose prose-invert flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-zinc-200 max-w-none"
+            className="prose prose-invert flex-1 w-full bg-black/40 p-5 rounded-2xl border border-white/5 overflow-y-auto text-xs sm:text-sm text-neutral-200 max-w-none"
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         </div>

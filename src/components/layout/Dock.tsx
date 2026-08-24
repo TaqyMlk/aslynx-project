@@ -22,7 +22,7 @@ export default function Dock() {
 
   return (
     <div className="fixed bottom-3 left-0 right-0 z-40 flex md:hidden justify-center px-3 pointer-events-none pb-[env(safe-area-inset-bottom)]">
-      <nav aria-label="Primary mobile navigation" className="pointer-events-auto flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-[#11131a]/96 border border-white/10 shadow-[0_12px_36px_-18px_rgba(0,0,0,.9)] max-w-full">
+      <nav aria-label="Primary mobile navigation" className="pointer-events-auto flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-[#0f1219] border border-white/10 max-w-full">
         {dockItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
@@ -33,7 +33,7 @@ export default function Dock() {
               href={item.href}
               aria-current={isActive ? 'page' : undefined}
               className={`relative flex flex-col items-center justify-center min-w-[54px] w-[54px] h-11 rounded-xl transition-colors duration-150 ${
-                isActive ? 'text-cyan-300 bg-white/[0.07]' : 'text-zinc-500 active:text-zinc-200 active:bg-white/[0.04]'
+                isActive ? 'text-cyan-300 bg-white/[0.07]' : 'text-neutral-500 active:text-neutral-200 active:bg-white/[0.04]'
               }`}
             >
               <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
@@ -46,7 +46,7 @@ export default function Dock() {
           type="button"
           onClick={openSearch}
           aria-label="Open site search"
-          className="relative flex flex-col items-center justify-center min-w-[54px] w-[54px] h-11 rounded-xl text-zinc-500 active:text-zinc-200 active:bg-white/[0.04] transition-colors duration-150"
+          className="relative flex flex-col items-center justify-center min-w-[54px] w-[54px] h-11 rounded-xl text-neutral-500 active:text-neutral-200 active:bg-white/[0.04] transition-colors duration-150"
         >
           <Search className="w-[18px] h-[18px]" strokeWidth={1.8} />
           <span className="text-[10px] leading-none font-medium mt-1">Search</span>

@@ -96,7 +96,7 @@ export default function PlaygroundPage() {
         description="High-performance hardware-accelerated warp-speed starfield renderer with dynamic relativistic projection and spectral palette tuning."
       />
 
-      <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-6">
+      <div className="bg-[#0f1219] p-6 rounded-3xl border border-white/10 space-y-6">
         {/* Canvas Container */}
         <div className="w-full h-[480px] bg-[#020617] rounded-2xl border border-white/10 overflow-hidden relative ">
           <canvas ref={canvasRef} className="w-full h-full block" />
@@ -104,8 +104,8 @@ export default function PlaygroundPage() {
 
         {/* Real-time Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 space-y-1.5">
-            <div className="flex justify-between text-xs text-zinc-300">
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div className="flex justify-between text-xs text-neutral-300">
               <span>Warp Speed</span>
               <span className="font-mono text-cyan-400 font-bold">{speed}x</span>
             </div>
@@ -120,10 +120,10 @@ export default function PlaygroundPage() {
             />
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 space-y-1.5">
-            <div className="flex justify-between text-xs text-zinc-300">
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div className="flex justify-between text-xs text-neutral-300">
               <span>Starfield Density</span>
-              <span className="font-mono text-blue-400 font-bold">{starCount}</span>
+              <span className="font-mono text-cyan-400 font-bold">{starCount}</span>
             </div>
             <input
               type="range"
@@ -136,18 +136,18 @@ export default function PlaygroundPage() {
             />
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 space-y-1.5">
-            <span className="text-xs text-zinc-300 block">Spectral Color</span>
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <span className="text-xs text-neutral-300 block">Spectral Color</span>
             <div className="grid grid-cols-3 gap-1.5">
               {(['cyan', 'purple', 'gold'] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTheme(t)}
-                  className={`py-1 rounded-lg text-xs font-bold capitalize transition-all ${
-                    theme === t
-                      ? 'bg-white/20 text-white border border-white/30'
-                      : 'bg-white/5 text-zinc-400 hover:text-white border border-white/5'
-                  }`}
+className={`py-1 rounded-lg text-xs font-bold capitalize transition-all ${
+                     theme === t
+                       ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
+                       : 'bg-white/5 text-neutral-400 hover:text-white border border-white/5'
+                   }`}
                 >
                   {t}
                 </button>

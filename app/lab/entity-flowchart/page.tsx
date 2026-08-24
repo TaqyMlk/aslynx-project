@@ -95,10 +95,10 @@ export default function EntityFlowchartPage() {
         {/* Flowchart Nodes (Left 7 cols) */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">Event Sequence Nodes</span>
+            <span className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">Event Sequence Nodes</span>
             <button
               onClick={addNode}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/30 text-xs font-semibold text-cyan-300 transition-all active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/30 text-xs font-semibold text-cyan-400 transition-all active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Event Node</span>
@@ -108,7 +108,7 @@ export default function EntityFlowchartPage() {
           <div className="space-y-4">
             {nodes.map((node, index) => (
               <React.Fragment key={node.id}>
-                <div className="glass-panel-elevated p-5 rounded-3xl border-white/10 space-y-3 relative group">
+                <div className="bg-[#0f1219] p-5 rounded-3xl border border-white/10 space-y-3 relative group">
                   <div className="flex items-center justify-between gap-2">
                     <span className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 font-bold text-xs flex items-center justify-center font-mono">
                       {index + 1}
@@ -128,7 +128,7 @@ export default function EntityFlowchartPage() {
                     {nodes.length > 1 && (
                       <button
                         onClick={() => removeNode(node.id)}
-                        className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                        className="p-1.5 rounded-lg text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
                         title="Delete node"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -137,7 +137,7 @@ export default function EntityFlowchartPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] text-zinc-400 mb-1">Trigger Condition</label>
+                    <label className="block text-[11px] text-neutral-400 mb-1">Trigger Condition</label>
                     <input
                       type="text"
                       value={node.trigger}
@@ -146,13 +146,13 @@ export default function EntityFlowchartPage() {
                         updated[index].trigger = e.target.value;
                         setNodes(updated);
                       }}
-                      className="w-full px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 text-zinc-300 text-xs focus:outline-none focus:border-cyan-400"
+                      className="w-full px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 text-neutral-300 text-xs focus:outline-none focus:border-cyan-400"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 text-xs pt-1">
                     <div>
-                      <span className="text-[11px] text-emerald-400 font-medium block mb-1">+ Add Component Groups</span>
+                      <span className="text-[11px] text-cyan-400 font-medium block mb-1">+ Add Component Groups</span>
                       <input
                         type="text"
                         value={node.addComponentGroups.join(', ')}
@@ -162,7 +162,7 @@ export default function EntityFlowchartPage() {
                           setNodes(updated);
                         }}
                         placeholder="e.g. lynx:active"
-                        className="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-emerald-500/20 text-zinc-200 font-mono text-[11px] focus:outline-none"
+                        className="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-cyan-500/20 text-neutral-200 font-mono text-[11px] focus:outline-none"
                       />
                     </div>
 
@@ -177,14 +177,14 @@ export default function EntityFlowchartPage() {
                           setNodes(updated);
                         }}
                         placeholder="e.g. lynx:idle"
-                        className="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-rose-500/20 text-zinc-200 font-mono text-[11px] focus:outline-none"
+                        className="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-rose-500/20 text-neutral-200 font-mono text-[11px] focus:outline-none"
                       />
                     </div>
                   </div>
                 </div>
 
                 {index < nodes.length - 1 && (
-                  <div className="flex justify-center text-zinc-600">
+                  <div className="flex justify-center text-neutral-600">
                     <ArrowDown className="w-5 h-5 animate-bounce" />
                   </div>
                 )}
@@ -194,9 +194,9 @@ export default function EntityFlowchartPage() {
         </div>
 
         {/* JSON Preview Output (Right 5 cols) */}
-        <div className="lg:col-span-5 glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-4">
+        <div className="lg:col-span-5 bg-[#0f1219] p-6 rounded-3xl border border-white/10 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
-            <span className="font-semibold text-zinc-200 flex items-center gap-1.5">
+            <span className="font-semibold text-neutral-200 flex items-center gap-1.5">
               <Workflow className="w-4 h-4 text-amber-400" />
               <span>Behavior JSON Events</span>
             </span>
@@ -210,7 +210,7 @@ export default function EntityFlowchartPage() {
             </button>
           </div>
 
-          <pre className="p-4 rounded-2xl bg-black/60 border border-white/5 font-mono text-xs text-zinc-300 overflow-x-auto max-h-[500px] overflow-y-auto leading-relaxed">
+          <pre className="p-4 rounded-2xl bg-black/60 border border-white/5 font-mono text-xs text-neutral-300 overflow-x-auto max-h-[500px] overflow-y-auto leading-relaxed">
             {generatedEventsJSON}
           </pre>
         </div>

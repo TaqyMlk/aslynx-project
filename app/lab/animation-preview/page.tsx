@@ -35,11 +35,11 @@ export default function AnimationPreviewPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
         {/* Controls (Left 5 cols) */}
-        <div className="lg:col-span-5 glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-5">
+        <div className="lg:col-span-5 bg-[#0f1219] p-6 rounded-3xl border border-white/10 space-y-5">
           <h3 className="text-base font-bold text-white mb-2">Motion Parameters</h3>
 
           <div>
-            <div className="flex justify-between text-xs text-zinc-300 mb-1.5">
+            <div className="flex justify-between text-xs text-neutral-300 mb-1.5">
               <span>Duration</span>
               <span className="font-mono text-cyan-400 font-bold">{duration}s</span>
             </div>
@@ -55,7 +55,7 @@ export default function AnimationPreviewPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5">Easing Curve</label>
+            <label className="block text-xs font-medium text-neutral-300 mb-1.5">Easing Curve</label>
             <div className="space-y-2">
               {[
                 { label: 'iOS Spring (0.16, 1, 0.3, 1)', val: 'cubic-bezier(0.16, 1, 0.3, 1)' as const },
@@ -69,7 +69,7 @@ export default function AnimationPreviewPage() {
                   className={`w-full py-2 px-3 rounded-xl text-left text-xs font-mono transition-all ${
                     easing === item.val
                       ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                      : 'bg-white/5 text-zinc-400 hover:text-white border border-white/5'
+                      : 'bg-white/5 text-neutral-400 hover:text-white border border-white/5'
                   }`}
                 >
                   {item.label}
@@ -88,11 +88,11 @@ export default function AnimationPreviewPage() {
         </div>
 
         {/* Animation Stage (Right 7 cols) */}
-        <div className="lg:col-span-7 glass-panel-elevated p-8 rounded-3xl border-white/10 flex flex-col items-center justify-center min-h-[360px] relative overflow-hidden">
+        <div className="lg:col-span-7 bg-[#0f1219] p-8 rounded-3xl border border-white/10 flex flex-col items-center justify-center min-h-[360px] relative overflow-hidden">
           <div className="w-full h-40 flex items-center justify-center relative">
             <div
               key={animKey}
-              className="w-24 h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-blue-500 to-purple-600 shadow-2xl flex items-center justify-center text-black font-bold text-xs"
+              className="w-24 h-24 rounded-3xl bg-cyan-400 flex items-center justify-center text-black font-bold text-xs"
               style={{
                 animation: `bounceExample ${duration}s ${easing} infinite alternate`
               }}

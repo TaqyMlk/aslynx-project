@@ -78,7 +78,7 @@ export default function JSONValidatorPage() {
       />
 
       {/* Action Toolbar */}
-      <div className="glass-panel p-4 rounded-2xl border-white/10 mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/10 mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <button
             onClick={() => validateAndFormat(false)}
@@ -90,7 +90,7 @@ export default function JSONValidatorPage() {
 
           <button
             onClick={() => validateAndFormat(true)}
-            className="px-3.5 py-1.5 rounded-xl glass-panel hover-surface border border-white/10 text-zinc-300 text-xs font-medium transition-all flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-xl bg-[#0f1219] hover:bg-white/[0.03] border border-white/10 text-neutral-300 text-xs font-medium transition-all flex items-center gap-1.5"
           >
             <Minimize2 className="w-3.5 h-3.5" />
             <span>Minify (Compact)</span>
@@ -98,7 +98,7 @@ export default function JSONValidatorPage() {
         </div>
 
         {stats && (
-          <div className="flex items-center gap-3 text-xs text-zinc-400">
+          <div className="flex items-center gap-3 text-xs text-neutral-400">
             <span>Keys: <strong className="text-white font-mono">{stats.keys}</strong></span>
             <span>•</span>
             <span>Size: <strong className="text-cyan-400 font-mono">{stats.sizeBytes} bytes</strong></span>
@@ -107,7 +107,7 @@ export default function JSONValidatorPage() {
       </div>
 
       {/* Editor & Feedback */}
-      <div className="glass-panel-elevated p-6 rounded-3xl border-white/10 space-y-4">
+      <div className="bg-[#0f1219] p-6 rounded-3xl border border-white/10 space-y-4">
         {error ? (
           <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
@@ -127,7 +127,7 @@ export default function JSONValidatorPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Paste raw JSON here to validate and format..."
-          className="w-full p-4 font-mono text-xs text-zinc-200 bg-black/60 border border-white/10 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 transition-colors leading-relaxed"
+          className="w-full p-4 font-mono text-xs text-neutral-200 bg-black/60 border border-white/10 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 transition-colors leading-relaxed"
           spellCheck={false}
         />
       </div>

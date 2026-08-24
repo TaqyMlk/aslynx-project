@@ -2,13 +2,13 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
-import { Orbit, RefreshCw, Zap, Sparkles } from 'lucide-react';
+import { RotateCw, Play, Sparkles, Zap } from 'lucide-react';
 
 export default function PlaygroundPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [speed, setSpeed] = useState(1);
   const [starCount, setStarCount] = useState(300);
-  const [theme, setTheme] = useState<'cyan' | 'purple' | 'gold'>('cyan');
+  const [theme, setTheme] = useState<'cyan' | 'amber' | 'emerald'>('cyan');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,8 +40,8 @@ export default function PlaygroundPage() {
 
     const colors = {
       cyan: { hex: '#00f2fe', glow: 'rgba(0, 242, 254, 0.4)' },
-      purple: { hex: '#c084fc', glow: 'rgba(192, 132, 252, 0.4)' },
-      gold: { hex: '#facc15', glow: 'rgba(250, 204, 21, 0.4)' }
+      amber: { hex: '#facc15', glow: 'rgba(250, 204, 21, 0.4)' },
+      emerald: { hex: '#34d399', glow: 'rgba(52, 211, 153, 0.4)' }
     };
 
     const render = () => {
@@ -92,65 +92,36 @@ export default function PlaygroundPage() {
       <ToolHeader
         title="Quantum Starlight Particle Nexus"
         category="Experiments"
-        badge="HTML5 Canvas 3D"
         description="High-performance hardware-accelerated warp-speed starfield renderer with dynamic relativistic projection and spectral palette tuning."
       />
 
-      <div className="bg-[#0f1219] p-6 rounded-3xl border border-white/10 space-y-6">
-        {/* Canvas Container */}
-        <div className="w-full h-[480px] bg-[#020617] rounded-2xl border border-white/10 overflow-hidden relative ">
+      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-6">
+        <div className="w-full h-[480px] bg-[#020617] rounded-2xl border border-white/8 overflow-hidden relative">
           <canvas ref={canvasRef} className="w-full h-full block" />
         </div>
 
-        {/* Real-time Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/8 space-y-1.5">
             <div className="flex justify-between text-xs text-neutral-300">
               <span>Warp Speed</span>
               <span className="font-mono text-cyan-400 font-bold">{speed}x</span>
             </div>
-            <input
-              type="range"
-              min="0.2"
-              max="5"
-              step="0.2"
-              value={speed}
-              onChange={(e) => setSpeed(parseFloat(e.target.value))}
-              className="w-full accent-cyan-400"
-            />
+            <input type="range" min="0.2" max="5" step="0.2" value={speed} onChange={(e) => setSpeed(parseFloat(e.target.value))} className="w-full accent-cyan-400" />
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/8 space-y-1.5">
             <div className="flex justify-between text-xs text-neutral-300">
               <span>Starfield Density</span>
               <span className="font-mono text-cyan-400 font-bold">{starCount}</span>
             </div>
-            <input
-              type="range"
-              min="50"
-              max="800"
-              step="50"
-              value={starCount}
-              onChange={(e) => setStarCount(parseInt(e.target.value, 10))}
-              className="w-full accent-blue-400"
-            />
+            <input type="range" min="50" max="800" step="50" value={starCount} onChange={(e) => setStarCount(parseInt(e.target.value, 10))} className="w-full accent-cyan-400" />
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/8 space-y-1.5">
             <span className="text-xs text-neutral-300 block">Spectral Color</span>
             <div className="grid grid-cols-3 gap-1.5">
-              {(['cyan', 'purple', 'gold'] as const).map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTheme(t)}
-className={`py-1 rounded-lg text-xs font-bold capitalize transition-all ${
-                     theme === t
-                       ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
-                       : 'bg-white/5 text-neutral-400 hover:text-white border border-white/5'
-                   }`}
-                >
-                  {t}
-                </button>
+              {(['cyan', 'amber', 'emerald'] as const).map((t) => (
+                <button key={t} onClick={() => setTheme(t)} className={`py-1.5 rounded-lg text-xs font-bold capitalize transition-all ${theme === t ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-white/5 text-neutral-400 hover:text-white border border-white/8'}`}>{t}</button>
               ))}
             </div>
           </div>

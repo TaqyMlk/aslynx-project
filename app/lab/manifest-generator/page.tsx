@@ -103,7 +103,6 @@ export default function ManifestGeneratorPage() {
       <ToolHeader
         title="Bedrock Manifest Generator"
         category="Minecraft Tools"
-        badge="Official Schema v2"
         description="Generate standards-compliant manifest.json files for Minecraft Bedrock Behavior & Resource packs with automated UUID v4 generation and Script API module bindings."
         onReset={handleReset}
         onCopy={handleCopy}

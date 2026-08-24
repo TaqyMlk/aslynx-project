@@ -59,40 +59,22 @@ export default function ToolCard({ tool }: ToolCardProps) {
     }
   };
 
-  const categoryColor: Record<string, string> = {
-    ai: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-    dev: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-    minecraft: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-    utility: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-    experiment: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
-  };
-
   return (
     <Link
       href={`/lab/${tool.slug}`}
-      className="bg-[#14171f] hover:bg-[#181b25] p-6 rounded-2xl border border-white/10 hover:border-white/15 flex flex-col justify-between transition-colors group h-full"
+      className="group bg-[#0f1219] hover:bg-[#14171f] p-6 rounded-2xl border border-white/8 flex flex-col justify-between transition-colors h-full"
     >
       <div>
         <div className="flex items-center justify-between gap-2 mb-4">
-          <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
             {getToolIcon(tool.icon)}
           </div>
-
-          <div className="flex items-center gap-1.5">
-            <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
-                categoryColor[tool.category] || categoryColor.utility
-              }`}>
-                {tool.category}
-              </span>
-            {tool.badge && (
-              <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/5 text-neutral-400 border border-white/5">
-                {tool.badge}
-              </span>
-            )}
-          </div>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/15">
+            {tool.category}
+          </span>
         </div>
 
-        <h3 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+        <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight group-hover:text-cyan-300 transition-colors duration-200">
           {tool.name}
         </h3>
 
@@ -102,18 +84,15 @@ export default function ToolCard({ tool }: ToolCardProps) {
       <div>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {tool.tags.slice(0, 3).map((tag, idx) => (
-            <span
-              key={idx}
-              className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-neutral-400 border border-white/5"
-            >
+            <span key={idx} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-neutral-400 border border-white/8">
               {tag}
             </span>
           ))}
         </div>
 
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors">
+        <div className="pt-3 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-200">
           <span>Launch Tool</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
         </div>
       </div>
     </Link>

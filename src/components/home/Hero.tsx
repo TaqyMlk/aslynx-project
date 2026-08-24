@@ -8,6 +8,6 @@ interface HeroProps {
 
 export default function Hero({ totalDownloads }: HeroProps) {
   return (
-    <BackgroundPaths title="AsLynx Portfolio" />
+    <BackgroundPaths title="AsLynx — AI, Bedrock & Web Engineering" />
   );
 }

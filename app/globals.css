@@ -2,19 +2,18 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  /* Hero-derived neutral monochrome palette */
   --bg-primary: #0a0a0a;
-  --bg-secondary: #101010;
+  --bg-secondary: #171717;
   --bg-card: rgba(255, 255, 255, 0.045);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
   --surface-soft: rgba(255, 255, 255, 0.025);
   --surface-strong: rgba(255, 255, 255, 0.06);
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.15);
-  --accent-cyan: #e5e7eb;
-  --accent-blue: #d4d4d8;
-  --accent-purple: #a1a1aa;
-  --text-primary: #f5f5f5;
+  --accent-cyan: #d4d4d8;
+  --accent-blue: #a3a3a3;
+  --accent-purple: #737373;
+  --text-primary: #fafafa;
   --text-secondary: #a3a3a3;
   --text-muted: #737373;
 }
@@ -46,21 +45,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 
-/* Shared visual language used across the site. */
 .glass-panel {
-  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
   border: 1px solid var(--border-subtle);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.035), 0 18px 50px -38px rgba(0,0,0,0.95);
-  backdrop-filter: blur(18px) saturate(110%);
-  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 18px 50px -38px rgba(0,0,0,0.95);
+  backdrop-filter: blur(18px) saturate(105%);
+  -webkit-backdrop-filter: blur(18px) saturate(105%);
 }
 
 .glass-panel-elevated {
-  background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
   border: 1px solid var(--border-strong);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045), 0 24px 60px -42px rgba(0,0,0,1);
-  backdrop-filter: blur(22px) saturate(115%);
-  -webkit-backdrop-filter: blur(22px) saturate(115%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 60px -42px rgba(0,0,0,1);
+  backdrop-filter: blur(22px) saturate(108%);
+  -webkit-backdrop-filter: blur(22px) saturate(108%);
 }
 
 .glass-panel-subtle {
@@ -71,7 +69,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .glow-cyan, .glow-purple {
-  box-shadow: 0 0 36px -28px rgba(255,255,255,0.5);
+  box-shadow: 0 0 34px -28px rgba(255,255,255,0.45);
 }
 
 .hover-surface {
@@ -89,9 +87,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(900px 500px at 50% -10%, rgba(255,255,255,0.055), transparent 68%),
-    radial-gradient(700px 500px at 0% 45%, rgba(255,255,255,0.018), transparent 70%),
-    radial-gradient(700px 500px at 100% 70%, rgba(255,255,255,0.014), transparent 70%),
+    radial-gradient(850px 520px at 50% -12%, rgba(255,255,255,0.045), transparent 68%),
+    radial-gradient(650px 480px at 0% 45%, rgba(255,255,255,0.015), transparent 70%),
     var(--bg-primary);
 }
 
@@ -99,8 +96,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.22;
-  background-image: radial-gradient(rgba(255,255,255,0.12) 0.5px, transparent 0.5px);
+  opacity: 0.16;
+  background-image: radial-gradient(rgba(255,255,255,0.1) 0.5px, transparent 0.5px);
   background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black, transparent 72%);
 }
@@ -116,5 +113,5 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 @media (max-width: 767px) {
   body { padding-bottom: env(safe-area-inset-bottom); }
-  .site-ambient::after { opacity: 0.14; }
+  .site-ambient::after { opacity: 0.1; }
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Project } from '@/src/types';
-import { Flame, ArrowRight, Github, ExternalLink, Box, Sparkles, Layers } from 'lucide-react';
+import { Flame, ArrowRight, Github } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
-import { CheckSquare, Check, Copy, AlertCircle, Minimize2, Maximize2, RotateCcw } from 'lucide-react';
+import { Check, AlertCircle, Minimize2, Maximize2 } from 'lucide-react';
 
 const SAMPLE_JSON = `{
   "addon_name": "Lynx Quality Tools",

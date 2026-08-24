@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
-import { Play, RotateCcw, Copy, Check, Terminal, FileCode, Eye, Sparkles } from 'lucide-react';
+import { Play, Terminal, Eye } from 'lucide-react';
 
 const STARTER_TEMPLATES: Record<string, { html: string; css: string; js: string }> = {
   vanilla: {

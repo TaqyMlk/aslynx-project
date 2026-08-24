@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ToolHeader from '@/src/components/lab/ToolHeader';
-import { RefreshCw, Copy, Check, Download, FileJson, Sparkles } from 'lucide-react';
+import { RefreshCw, Copy, Check, Download, FileJson } from 'lucide-react';
 
 function generateUUID(): string {
   return crypto.randomUUID();

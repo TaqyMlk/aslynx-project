@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { SOCIALS } from '@/src/data/socials';
-import { Terminal, Shield, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
   return (

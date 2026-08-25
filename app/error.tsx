@@ -27,7 +27,7 @@ export default function Error({
           <h1 className="text-3xl font-extrabold text-white tracking-tight">
             Something went wrong
           </h1>
-          <p className="text-sm text-zinc-400 leading-relaxed">
+          <p className="text-sm text-neutral-400 leading-relaxed">
             An unexpected error occurred while loading this page. This could be a temporary issue — please try again.
           </p>
         </div>

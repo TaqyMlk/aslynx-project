@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft, Copy, Check, RotateCw } from 'lucide-react';
 

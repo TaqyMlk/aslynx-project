@@ -1,4 +1,3 @@
-import React from 'react';
 import { Metadata } from 'next';
 import AboutSection from '@/src/components/home/AboutSection';
 import FieldsSection from '@/src/components/home/FieldsSection';

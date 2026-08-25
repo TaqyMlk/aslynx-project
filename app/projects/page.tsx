@@ -1,4 +1,3 @@
-import React from 'react';
 import { Metadata } from 'next';
 import { PROJECTS } from '@/src/data/projects';
 import { fetchCurseForgeStats } from '@/src/server/curseforge/client';

@@ -50,11 +50,11 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
 
         <div className="flex items-center gap-2">
           <div className="flex items-center bg-black/40 p-1 rounded-lg border border-white/10 text-xs">
-            <button onClick={() => setLang('en')} aria-pressed={lang === 'en'} className={`px-2.5 py-1 rounded-md font-medium transition-all ${lang === 'en' ? 'bg-white/15 text-white' : 'text-zinc-400 hover:text-zinc-200'}`}>EN</button>
-            <button onClick={() => setLang('id')} aria-pressed={lang === 'id'} className={`px-2.5 py-1 rounded-md font-medium transition-all ${lang === 'id' ? 'bg-white/15 text-white' : 'text-zinc-400 hover:text-zinc-200'}`}>ID</button>
+            <button onClick={() => setLang('en')} aria-pressed={lang === 'en'} className={`px-2.5 py-1 rounded-md font-medium transition-all ${lang === 'en' ? 'bg-white/15 text-white' : 'text-neutral-400 hover:text-neutral-200'}`}>EN</button>
+            <button onClick={() => setLang('id')} aria-pressed={lang === 'id'} className={`px-2.5 py-1 rounded-md font-medium transition-all ${lang === 'id' ? 'bg-white/15 text-white' : 'text-neutral-400 hover:text-neutral-200'}`}>ID</button>
           </div>
 
-          <button onClick={handleShare} className="p-2 rounded-lg bg-[#0f1219] border border-white/8 text-zinc-300 hover:text-white transition-colors" title="Share Link">
+          <button onClick={handleShare} className="p-2 rounded-lg bg-[#0f1219] border border-white/8 text-neutral-300 hover:text-white transition-colors" title="Share Link">
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
           </button>
         </div>
@@ -64,7 +64,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-md border border-cyan-500/15">{project.category}</span>
-            {project.version && <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 text-zinc-300 border border-white/8">{project.version}</span>}
+            {project.version && <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 text-neutral-300 border border-white/8">{project.version}</span>}
             {project.status && <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/15">{project.status.toUpperCase()}</span>}
           </div>
 

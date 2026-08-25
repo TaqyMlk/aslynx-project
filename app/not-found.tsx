@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="text-center space-y-6 max-w-md">
         <div className="flex justify-center">
           <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
-            <Box className="w-8 h-8 text-zinc-500" />
+            <Box className="w-8 h-8 text-neutral-500" />
           </div>
         </div>
 
@@ -15,10 +15,10 @@ export default function NotFound() {
           <h1 className="text-5xl font-extrabold text-white tracking-tighter">
             404
           </h1>
-          <h2 className="text-lg font-semibold text-zinc-300">
+          <h2 className="text-lg font-semibold text-neutral-300">
             Page not found
           </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
+          <p className="text-sm text-neutral-500 leading-relaxed">
             The page you are looking for does not exist or has been moved. Let&apos;s get you back on track.
           </p>
         </div>

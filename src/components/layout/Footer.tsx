@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { SOCIALS } from '@/src/data/socials';
 

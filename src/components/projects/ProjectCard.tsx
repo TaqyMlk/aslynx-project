@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import { Project } from '@/src/types';
 import { Flame, ArrowRight, Github } from 'lucide-react';

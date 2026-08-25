@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'motion/react';
 import { EXPERIENCES } from '@/src/data/experience';
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';

@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'motion/react';
 import { User, CheckCircle2 } from 'lucide-react';
 

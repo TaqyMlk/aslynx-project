@@ -63,7 +63,7 @@ function AgentSidebar({
       </div>
       <div className="px-4 pt-4 pb-2 flex justify-between"><span className="label">Conversations</span><span className="text-[10px] text-neutral-500">{sessions.length}</span></div>
       <div className="flex-1 overflow-y-auto px-2 pb-3">
-        {sessions.map((s) => <div key={s.id} className={`group flex items-center rounded-lg mb-0.5 ${s.id === activeId ? 'bg-white/[.06] text-zinc-100' : 'text-zinc-500 hover:bg-white/[.035]'}`}>
+        {sessions.map((s) => <div key={s.id} className={`group flex items-center rounded-lg mb-0.5 ${s.id === activeId ? 'bg-white/[.06] text-white' : 'text-neutral-500 hover:bg-white/[.035]'}`}>
           <button onClick={() => onSelect(s.id)} className="flex-1 min-w-0 text-left flex items-center gap-2 px-3 py-2.5"><MessageSquare className="w-3.5 h-3.5 shrink-0 opacity-50" /><span className="truncate text-xs">{s.title || 'New conversation'}</span></button>
           <button onClick={() => onDeleteSession(s.id)} className="nav-icon-btn mr-1 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:text-rose-300" aria-label={`Delete conversation: ${s.title}`}><Trash2 className="w-3.5 h-3.5" /></button>
         </div>)}

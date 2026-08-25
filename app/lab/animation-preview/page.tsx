@@ -33,7 +33,7 @@ export default function AnimationPreviewPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
-        <div className="lg:col-span-5 bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-5">
+        <div className="lg:col-span-5 bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-5">
           <h3 className="text-base font-bold text-white tracking-tight">Motion Parameters</h3>
 
           <div>
@@ -66,7 +66,7 @@ export default function AnimationPreviewPage() {
           </button>
         </div>
 
-        <div className="lg:col-span-7 bg-[#0f1219] p-8 rounded-2xl border border-white/8 flex flex-col items-center justify-center min-h-[360px] relative">
+        <div className="lg:col-span-7 bg-[#020617] p-8 rounded-2xl border border-white/8 flex flex-col items-center justify-center min-h-[360px] relative">
           <div className="w-full h-40 flex items-center justify-center relative">
             <div key={animKey} className="w-24 h-24 rounded-2xl bg-cyan-400 flex items-center justify-center text-neutral-900 font-bold text-xs" style={{ animation: `bounceExample ${duration}s ${easing} infinite alternate` }}>
               <Sparkles className="w-8 h-8" />

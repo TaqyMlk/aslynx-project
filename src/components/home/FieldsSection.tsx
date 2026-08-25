@@ -33,7 +33,7 @@ export default function FieldsSection() {
         {fields.map((field) => {
           const Icon = field.icon;
           return (
-            <motion.div key={field.id} variants={itemVariants} className="bg-[#0f1219] hover:bg-white/[0.03] p-6 sm:p-7 rounded-2xl flex flex-col justify-between border border-white/8 transition-colors">
+            <motion.div key={field.id} variants={itemVariants} className="bg-[#020617] hover:bg-white/[0.03] p-6 sm:p-7 rounded-2xl flex flex-col justify-between border border-white/8 transition-colors">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center mb-5"><Icon className="w-6 h-6 text-neutral-200" /></div>
                 <h3 className="text-lg font-bold text-white mb-2 tracking-tight">{field.title}</h3>

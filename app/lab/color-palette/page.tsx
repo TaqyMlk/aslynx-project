@@ -130,7 +130,7 @@ export default function ColorPalettePage() {
         description="Generate mathematical color harmonies (Analogous, Complementary, Triadic) with real WCAG 2.1 contrast ratios against the site's dark background."
       />
 
-      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <input type="color" aria-label="Pick base color" value={validHex ? baseColor : '#000000'} onChange={(e) => setBaseColor(e.target.value)} className="w-14 h-14 rounded-xl cursor-pointer bg-transparent border-0" />
           <div>

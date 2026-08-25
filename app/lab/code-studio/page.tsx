@@ -105,7 +105,7 @@ export default function CodeStudioPage() {
         copied={copied}
       />
 
-      <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/8 mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#020617] p-4 rounded-2xl border border-white/8 mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="text-xs text-neutral-400 font-medium">Presets:</span>
           <button onClick={() => { setHtml(STARTER_TEMPLATES.vanilla.html); setCss(STARTER_TEMPLATES.vanilla.css); setJs(STARTER_TEMPLATES.vanilla.js); setTimeout(runCode, 50); }} className="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 text-neutral-300 border border-white/8 transition-all">Glassmorphic Card</button>
@@ -119,7 +119,7 @@ export default function CodeStudioPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch mb-6">
-        <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/8 flex flex-col h-[520px]">
+        <div className="bg-[#020617] p-4 rounded-2xl border border-white/8 flex flex-col h-[520px]">
           <div className="flex items-center justify-between gap-2 pb-3 border-b border-white/8 mb-3">
             <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/8 text-xs">
               {(['html', 'css', 'js'] as const).map((tab) => (
@@ -138,7 +138,7 @@ export default function CodeStudioPage() {
           </div>
         </div>
 
-        <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/8 flex flex-col h-[520px]">
+        <div className="bg-[#020617] p-4 rounded-2xl border border-white/8 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 mb-3 text-xs">
             <span className="font-semibold text-neutral-300 flex items-center gap-1.5"><Eye className="w-4 h-4 text-cyan-400" />Interactive Live Preview</span>
             <span className="text-[11px] text-neutral-500 font-mono">sandbox ready</span>
@@ -150,7 +150,7 @@ export default function CodeStudioPage() {
         </div>
       </div>
 
-      <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/8 space-y-3">
+      <div className="bg-[#020617] p-4 rounded-2xl border border-white/8 space-y-3">
         <div className="flex items-center justify-between text-xs pb-2 border-b border-white/8">
           <span className="font-semibold text-neutral-300 flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5 text-cyan-400" />Console Output</span>
           <button onClick={() => setLogs([])} className="text-neutral-500 hover:text-neutral-200 text-[11px] transition-colors">Clear Logs</button>

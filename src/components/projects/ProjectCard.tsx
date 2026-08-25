@@ -25,7 +25,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     : null;
 
   return (
-    <div className="bg-[#0f1219] hover:bg-[#14171f] p-6 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between transition-colors group h-full">
+    <div className="bg-[#020617] hover:bg-[#020617] p-6 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between transition-colors group h-full">
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-4">

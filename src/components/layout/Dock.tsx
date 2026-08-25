@@ -21,7 +21,7 @@ export default function Dock() {
 
   return (
     <div className="fixed bottom-3 left-0 right-0 z-40 flex md:hidden justify-center px-3 pointer-events-none pb-[env(safe-area-inset-bottom)]">
-      <nav aria-label="Primary mobile navigation" className="pointer-events-auto flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-[#0f1219] border border-white/8 max-w-full">
+      <nav aria-label="Primary mobile navigation" className="pointer-events-auto flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-[#020617] border border-white/8 max-w-full">
         {dockItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);

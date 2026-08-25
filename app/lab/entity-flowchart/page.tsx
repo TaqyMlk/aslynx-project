@@ -63,7 +63,7 @@ export default function EntityFlowchartPage() {
           <div className="space-y-4">
             {nodes.map((node, index) => (
               <React.Fragment key={node.id}>
-                <div className="bg-[#0f1219] p-5 rounded-2xl border border-white/8 space-y-3 relative group">
+                <div className="bg-[#020617] p-5 rounded-2xl border border-white/8 space-y-3 relative group">
                   <div className="flex items-center justify-between gap-2">
                     <span className="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs flex items-center justify-center font-mono shrink-0">{index + 1}</span>
 
@@ -105,7 +105,7 @@ export default function EntityFlowchartPage() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-4">
+        <div className="lg:col-span-5 bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 text-xs">
             <span className="font-semibold text-neutral-300 flex items-center gap-1.5"><Workflow className="w-4 h-4 text-cyan-400" />Behavior JSON Events</span>
 

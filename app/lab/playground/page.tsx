@@ -95,7 +95,7 @@ export default function PlaygroundPage() {
         description="High-performance hardware-accelerated warp-speed starfield renderer with dynamic relativistic projection and spectral palette tuning."
       />
 
-      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-6">
+      <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-6">
         <div className="w-full h-[480px] bg-[#020617] rounded-2xl border border-white/8 overflow-hidden relative">
           <canvas ref={canvasRef} className="w-full h-full block" />
         </div>

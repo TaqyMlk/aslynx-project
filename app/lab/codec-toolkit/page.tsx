@@ -63,12 +63,12 @@ export default function CodecToolkitPage() {
 
       <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6">
         {(['base64', 'url', 'hex', 'binary', 'jwt'] as const).map((codec) => (
-          <button key={codec} onClick={() => setActiveCodec(codec)} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${activeCodec === codec ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-[#0f1219] text-neutral-400 hover:text-white border border-white/8'}`}>{codec}</button>
+          <button key={codec} onClick={() => setActiveCodec(codec)} className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${activeCodec === codec ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-[#020617] text-neutral-400 hover:text-white border border-white/8'}`}>{codec}</button>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-3">
+        <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-3">
           <div className="flex items-center justify-between">
             <label className="text-xs font-semibold text-neutral-300">Input Data</label>
             <button onClick={handleDecode} className="text-xs text-cyan-400 hover:underline flex items-center gap-1 transition-colors"><ArrowRightLeft className="w-3 h-3" /><span>Decode to Input</span></button>
@@ -77,7 +77,7 @@ export default function CodecToolkitPage() {
           <textarea rows={8} value={input} onChange={(e) => setInput(e.target.value)} className="w-full p-4 font-mono text-xs text-neutral-200 bg-black/60 border border-white/8 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 transition-colors" />
         </div>
 
-        <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-3">
+        <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-3">
           <div className="flex items-center justify-between">
             <label className="text-xs font-semibold text-neutral-300">Encoded Result ({activeCodec.toUpperCase()})</label>
             <button onClick={handleCopy} className="text-xs text-cyan-400 hover:underline flex items-center gap-1 transition-colors">

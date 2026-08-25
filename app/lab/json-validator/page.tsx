@@ -76,14 +76,14 @@ export default function JSONValidatorPage() {
         copied={copied}
       />
 
-      <div className="bg-[#0f1219] p-4 rounded-2xl border border-white/8 mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#020617] p-4 rounded-2xl border border-white/8 mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <button onClick={() => validateAndFormat(false)} className="px-3.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/15 border border-cyan-500/20 text-cyan-400 text-xs font-semibold transition-all flex items-center gap-1.5">
             <Maximize2 className="w-3.5 h-3.5" />
             <span>Beautify / Format</span>
           </button>
 
-          <button onClick={() => validateAndFormat(true)} className="px-3.5 py-1.5 rounded-lg bg-[#0f1219] hover:bg-white/[0.03] border border-white/8 text-neutral-300 text-xs font-medium transition-all flex items-center gap-1.5">
+          <button onClick={() => validateAndFormat(true)} className="px-3.5 py-1.5 rounded-lg bg-[#020617] hover:bg-white/[0.03] border border-white/8 text-neutral-300 text-xs font-medium transition-all flex items-center gap-1.5">
             <Minimize2 className="w-3.5 h-3.5" />
             <span>Minify (Compact)</span>
           </button>
@@ -98,7 +98,7 @@ export default function JSONValidatorPage() {
         )}
       </div>
 
-      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-4">
+      <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-4">
         {error ? (
           <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/15 text-rose-400 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />

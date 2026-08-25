@@ -49,7 +49,7 @@ export default function RegexTesterPage() {
         copied={copied}
       />
 
-      <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 mb-6 space-y-4">
+      <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 mb-6 space-y-4">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="flex-1 w-full relative">
             <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-neutral-500 text-sm">/</span>
@@ -72,12 +72,12 @@ export default function RegexTesterPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-3">
+        <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-3">
           <label htmlFor="regex-test-string" className="block text-xs font-semibold text-neutral-300">Test String</label>
           <textarea id="regex-test-string" rows={10} value={testString} onChange={(e) => setTestString(e.target.value)} className="w-full p-4 font-mono text-xs text-neutral-200 bg-black/60 border border-white/8 rounded-2xl resize-none focus:outline-none focus:border-cyan-400 transition-colors leading-relaxed" />
         </div>
 
-        <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-4">
+        <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 text-xs">
             <span className="font-semibold text-white">Capture Results</span>
             <span className="font-mono text-cyan-400 font-bold">{matches.length} matches found</span>

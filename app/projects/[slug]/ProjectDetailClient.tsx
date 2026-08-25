@@ -43,7 +43,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="w-full max-w-5xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 pb-24">
       <div className="flex items-center justify-between gap-4 mb-8">
-        <Link href="/projects" className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-cyan-400 px-3 py-1.5 rounded-lg bg-[#0f1219] border border-white/8 hover:border-white/15 transition-all">
+        <Link href="/projects" className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-cyan-400 px-3 py-1.5 rounded-lg bg-[#020617] border border-white/8 hover:border-white/15 transition-all">
           <ChevronLeft className="w-4 h-4" />
           <span>Back to Projects</span>
         </Link>
@@ -54,13 +54,13 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
             <button onClick={() => setLang('id')} aria-pressed={lang === 'id'} className={`px-2.5 py-1 rounded-md font-medium transition-all ${lang === 'id' ? 'bg-white/15 text-white' : 'text-neutral-400 hover:text-neutral-200'}`}>ID</button>
           </div>
 
-          <button onClick={handleShare} className="p-2 rounded-lg bg-[#0f1219] border border-white/8 text-neutral-300 hover:text-white transition-colors" title="Share Link">
+          <button onClick={handleShare} className="p-2 rounded-lg bg-[#020617] border border-white/8 text-neutral-300 hover:text-white transition-colors" title="Share Link">
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#0f1219] p-6 sm:p-10 rounded-2xl border border-white/8 mb-10">
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#020617] p-6 sm:p-10 rounded-2xl border border-white/8 mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-md border border-cyan-500/15">{project.category}</span>
@@ -69,7 +69,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
           </div>
 
           {formattedDownloads && (
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#0f1219] border border-cyan-500/15 text-cyan-400 text-sm font-bold shrink-0">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#020617] border border-cyan-500/15 text-cyan-400 text-sm font-bold shrink-0">
               <Flame className="w-4 h-4 text-cyan-400" />
               <span>{formattedDownloads} Total Downloads</span>
             </div>
@@ -89,14 +89,14 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
           )}
 
           {project.github && (
-            <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0f1219] hover:bg-white/[0.03] border border-white/8 hover:border-white/15 text-white font-medium text-xs sm:text-sm transition-all">
+            <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#020617] hover:bg-white/[0.03] border border-white/8 hover:border-white/15 text-white font-medium text-xs sm:text-sm transition-all">
               <Github className="w-4 h-4" />
               <span>View Source on GitHub</span>
             </a>
           )}
 
           {project.url && (
-            <a href={project.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0f1219] hover:bg-white/[0.03] border border-white/8 hover:border-white/15 text-white font-medium text-xs sm:text-sm transition-all">
+            <a href={project.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#020617] hover:bg-white/[0.03] border border-white/8 hover:border-white/15 text-white font-medium text-xs sm:text-sm transition-all">
               <ExternalLink className="w-4 h-4" />
               <span>Live Demonstration</span>
             </a>
@@ -105,7 +105,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
       </motion.div>
 
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        <div className="lg:col-span-2 bg-[#0f1219] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-4">
+        <div className="lg:col-span-2 bg-[#020617] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-4">
           <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-cyan-400" />
             Key Features & Mechanics
@@ -122,7 +122,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
           </div>
         </div>
 
-        <div className="bg-[#0f1219] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-6">
+        <div className="bg-[#020617] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-6">
           <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
             <Cpu className="w-5 h-5 text-cyan-400" />
             Technical Specs
@@ -167,7 +167,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
       </motion.div>
 
       {project.changelog && project.changelog.length > 0 && (
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#0f1219] p-6 sm:p-8 rounded-2xl border border-white/8 mb-12 space-y-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#020617] p-6 sm:p-8 rounded-2xl border border-white/8 mb-12 space-y-4">
           <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
             <Calendar className="w-5 h-5 text-cyan-400" />
             Release Changelog

@@ -69,7 +69,7 @@ export default function MarkdownPreviewPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        <div className="bg-[#0f1219] p-5 rounded-2xl border border-white/8 flex flex-col h-[520px]">
+        <div className="bg-[#020617] p-5 rounded-2xl border border-white/8 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 mb-3 text-xs">
             <span className="font-semibold text-neutral-300 flex items-center gap-1.5"><FileText className="w-4 h-4 text-cyan-400" />Markdown Source</span>
             <span className="text-[11px] text-neutral-500 font-mono">{markdown.length} chars</span>
@@ -78,7 +78,7 @@ export default function MarkdownPreviewPage() {
           <textarea value={markdown} onChange={(e) => setMarkdown(e.target.value)} className="flex-1 w-full p-4 font-mono text-xs text-neutral-200 bg-black/60 border border-white/8 rounded-xl resize-none focus:outline-none focus:border-cyan-400 transition-colors" spellCheck={false} />
         </div>
 
-        <div className="bg-[#0f1219] p-6 rounded-2xl border border-white/8 flex flex-col h-[520px]">
+        <div className="bg-[#020617] p-6 rounded-2xl border border-white/8 flex flex-col h-[520px]">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 mb-3 text-xs">
             <span className="font-semibold text-neutral-300">Rendered Typography</span>
             <button onClick={handleDownload} className="text-xs text-cyan-400 hover:underline flex items-center gap-1 transition-colors">

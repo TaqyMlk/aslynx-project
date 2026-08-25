@@ -114,7 +114,7 @@ export default function PromptOptimizerPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-6 bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-4">
+        <div className="lg:col-span-6 bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-base font-bold text-white tracking-tight">Draft Prompt Concept</h3>
             <span className="text-xs text-neutral-500 font-mono">~{estRawTokens} tokens</span>
@@ -165,7 +165,7 @@ export default function PromptOptimizerPage() {
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-4">
+        <div className="lg:col-span-6 bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/8 text-xs">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-white flex items-center gap-1.5">

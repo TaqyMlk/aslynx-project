@@ -61,7 +61,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link
       href={`/lab/${tool.slug}`}
-      className="group bg-[#0f1219] hover:bg-[#14171f] p-6 rounded-2xl border border-white/8 flex flex-col justify-between transition-colors h-full"
+      className="group bg-[#020617] hover:bg-[#020617] p-6 rounded-2xl border border-white/8 flex flex-col justify-between transition-colors h-full"
     >
       <div>
         <div className="flex items-center justify-between gap-2 mb-4">

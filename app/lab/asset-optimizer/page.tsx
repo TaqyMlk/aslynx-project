@@ -31,7 +31,7 @@ export default function AssetOptimizerPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-6 bg-[#0f1219] p-6 rounded-2xl border border-white/8 space-y-5">
+        <div className="lg:col-span-6 bg-[#020617] p-6 rounded-2xl border border-white/8 space-y-5">
           <h3 className="text-base font-bold text-white tracking-tight">Asset Parameters</h3>
 
           <div>
@@ -68,7 +68,7 @@ export default function AssetOptimizerPage() {
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-[#0f1219] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-6">
+        <div className="lg:col-span-6 bg-[#020617] p-6 sm:p-8 rounded-2xl border border-white/8 space-y-6">
           <div className="flex items-center justify-between pb-3 border-b border-white/8">
             <span className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">Estimated Memory Footprint</span>
             <span className={`text-xs font-bold px-2.5 py-0.5 rounded-md ${isOptimal ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/15' : 'bg-amber-500/10 text-amber-400 border border-amber-500/15'}`}>{isOptimal ? 'Mobile Optimized' : 'Heavy Add-on'}</span>

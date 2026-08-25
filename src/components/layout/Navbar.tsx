@@ -111,7 +111,7 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 py-3 sm:px-4 sm:py-4">
-        <nav aria-label="Primary navigation" className={`w-full max-w-5xl flex items-center justify-between px-3.5 sm:px-5 py-2.5 rounded-2xl border transition-colors duration-200 ${scrolled ? 'bg-[#0f1219]/80 border-white/[0.13]' : 'bg-[#020617]/60 border-white/[0.08]'}`}>
+        <nav aria-label="Primary navigation" className={`w-full max-w-5xl flex items-center justify-between px-3.5 sm:px-5 py-2.5 rounded-2xl border transition-colors duration-200 ${scrolled ? 'bg-[#020617]/80 border-white/[0.13]' : 'bg-[#020617]/60 border-white/[0.08]'}`}>
           <Link href="/" className="flex items-center gap-2.5 group min-w-0">
             <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 transition-colors group-hover:border-white/20">
               <span className="font-semibold text-[11px] text-white">AL</span>
@@ -125,7 +125,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-0.5 bg-[#0f1219] p-1 rounded-lg border border-white/8">
+          <div className="hidden md:flex items-center gap-0.5 bg-[#020617] p-1 rounded-lg border border-white/8">
             {navLinks.map((link) => {
               const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
               return (
@@ -147,7 +147,7 @@ export default function Navbar() {
       {searchOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center px-3 sm:px-4 pt-[10vh] sm:pt-[14vh]">
           <button type="button" aria-label="Close search" onClick={closeSearch} className="absolute inset-0 bg-black/80 cursor-default" />
-          <motion.div role="dialog" aria-modal="true" aria-label="Site search" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="relative w-full max-w-xl bg-[#0f1219] rounded-2xl overflow-hidden border border-white/8">
+          <motion.div role="dialog" aria-modal="true" aria-label="Site search" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="relative w-full max-w-xl bg-[#020617] rounded-2xl overflow-hidden border border-white/8">
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/[0.07]">
               <Search className="w-4 h-4 text-neutral-400 shrink-0" />
               <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search projects, tools, pages..." aria-label="Search site" className="flex-1 min-w-0 bg-transparent outline-none text-sm text-white placeholder:text-neutral-600" />

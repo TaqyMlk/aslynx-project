@@ -14,7 +14,7 @@ export default function ExperienceSection() {
       </div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} transition={{ staggerChildren: 0.12 }} className="space-y-5">
         {EXPERIENCES.map((exp) => (
-          <motion.div key={exp.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#0f1219] hover:bg-white/[0.03] p-6 sm:p-8 rounded-2xl border border-white/8 transition-colors">
+          <motion.div key={exp.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#020617] hover:bg-white/[0.03] p-6 sm:p-8 rounded-2xl border border-white/8 transition-colors">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
               <div>
                 <h3 className="text-xl font-bold text-white tracking-tight">{exp.role}</h3>

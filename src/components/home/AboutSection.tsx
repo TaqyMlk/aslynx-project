@@ -13,7 +13,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto scroll-mt-24">
       <div className="flex flex-col lg:flex-row gap-10 items-start">
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="w-full lg:w-5/12 bg-[#0f1219] p-6 sm:p-8 rounded-2xl border border-white/8">
+        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="w-full lg:w-5/12 bg-[#020617] p-6 sm:p-8 rounded-2xl border border-white/8">
           <div className="w-14 h-14 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mb-6"><User className="w-7 h-7" /></div>
           <h3 className="text-2xl font-bold text-white mb-1.5 tracking-tight">Muhammad Abdulhadi Taqy</h3>
           <p className="text-sm font-medium text-neutral-300 mb-4">Known as AsLynx</p>
@@ -32,7 +32,7 @@ export default function AboutSection() {
           </div>
           <div className="space-y-3">
             {philosophies.map((item, idx) => (
-              <motion.div key={item.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#0f1219] p-5 rounded-2xl flex gap-4 items-start border border-white/8">
+              <motion.div key={item.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }} className="bg-[#020617] p-5 rounded-2xl flex gap-4 items-start border border-white/8">
                 <div className="w-6 h-6 rounded-lg bg-white/[0.06] border border-white/10 text-white flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 className="w-4 h-4" /></div>
                 <div>
                   <h4 className="text-sm font-semibold text-white mb-1">{item.title}</h4>

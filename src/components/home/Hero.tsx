@@ -2,73 +2,68 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Terminal, Cpu, Sparkles } from 'lucide-react';
+import { ArrowRight, Terminal } from 'lucide-react';
 
 interface HeroProps {
   totalDownloads: number;
 }
 
 export default function Hero({ totalDownloads }: HeroProps) {
-  const formattedDownloads = new Intl.NumberFormat('en-US').format(totalDownloads || 350000);
+  const formatted = new Intl.NumberFormat('en-US').format(totalDownloads || 350000);
 
   return (
-    <section className="relative min-h-[90vh] sm:min-h-screen w-full flex flex-col justify-center items-center overflow-hidden px-4 sm:px-6 pt-24 pb-12">
-      {/* Background ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div className="w-[500px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-indigo-500/5 to-transparent rounded-full blur-3xl opacity-70 animate-pulse" />
-        <div className="absolute top-1/3 w-[300px] h-[300px] bg-sky-500/10 rounded-full blur-2xl" />
+    <section className="relative w-full flex flex-col justify-center overflow-hidden px-4 sm:px-6 pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px] mask-[radial-gradient(ellipse_70%_60%_at_50%_30%,black_40%,transparent_75%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-cyan-500/[0.07] blur-[90px] rounded-full" />
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center"
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="relative z-10 max-w-5xl mx-auto w-full"
       >
-        {/* Eyebrow / Tag */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-slate-300 backdrop-blur-md mb-8">
-          <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-          <span className="font-mono text-[11px] uppercase tracking-wider text-cyan-400">AI & BEDROCK ENGINEERING</span>
-          <span className="text-slate-600">|</span>
-          <span className="text-slate-400 font-medium">{formattedDownloads}+ Add-on Downloads</span>
+        <div className="flex items-center gap-3 mb-8">
+          <span className="h-px w-8 bg-cyan-400/60" aria-hidden />
+          <span className="text-[11px] font-mono tracking-[0.18em] uppercase text-cyan-400">
+            AI & Bedrock Systems — {formatted} downloads
+          </span>
         </div>
 
-        {/* Oversized Branding Title */}
-        <h1 className="text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter text-white mb-6 select-none">
-          ASLYNX<span className="text-cyan-400">.</span>
+        <h1 className="text-[2.6rem] sm:text-6xl md:text-[4.5rem] font-[800] tracking-[-0.04em] leading-[0.9] text-white">
+          ASLYNX
         </h1>
 
-        {/* Large Vision Statement */}
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-200 max-w-3xl leading-tight mb-6">
-          Architecting Intelligent Systems & Modular Bedrock Ecosystems
+        <h2 className="mt-4 text-[1.35rem] sm:text-2xl md:text-[1.85rem] font-[600] tracking-[-0.025em] leading-tight text-slate-200 max-w-2xl">
+          Intelligent systems & modular Bedrock ecosystems, built with precision.
         </h2>
 
-        {/* Supporting Description */}
-        <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-10 font-normal">
-          AI Prompt Specialist, Bedrock Script API Developer, and Digital Builder. Creating high-performance Minecraft add-ons, prompt frameworks, and open-source software tools.
+        <p className="mt-4 text-sm sm:text-[15px] leading-relaxed text-slate-400 max-w-xl">
+          AI prompt specialist and Bedrock Script API developer. High-performance Minecraft add-ons, prompt frameworks, and open tooling used by builders worldwide.
         </p>
 
-        {/* Action CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        <div className="mt-8 flex flex-col sm:flex-row gap-3">
           <Link
             href="#projects"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-slate-950 font-semibold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-slate-950 text-sm font-semibold hover:bg-slate-100 transition-colors"
           >
-            <span>Explore Showcase</span>
-            <ArrowRight className="w-4 h-4" />
+            Explore showcase <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href="/lab"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-900/80 text-slate-200 font-medium border border-slate-800 hover:border-slate-700 hover:bg-slate-800/80 transition-all backdrop-blur-md"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/[0.06] border border-white/10 text-slate-200 text-sm font-medium hover:bg-white/[0.1] hover:border-white/15 transition-colors"
           >
-            <Terminal className="w-4 h-4 text-cyan-400" />
-            <span>Developer Lab</span>
+            <Terminal className="w-4 h-4 text-cyan-400" /> Developer lab
           </Link>
         </div>
-      </motion.div>
 
-      {/* Futuristic Grid Line / Accent at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
+        <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-mono text-slate-500">
+          <span className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10">Next.js 15</span>
+          <span className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10">Bedrock Script API</span>
+          <span className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10">Prompt Systems</span>
+        </div>
+      </motion.div>
     </section>
   );
 }

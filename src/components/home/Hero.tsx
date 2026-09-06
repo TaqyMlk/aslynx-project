@@ -135,36 +135,40 @@ export default function Hero({ totalDownloads }: HeroProps) {
         />
       </motion.div>
 
-      <motion.div style={{ opacity, scale }} className="max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-start px-4 sm:px-6 pt-20 sm:pt-28 pb-8 sm:pb-16">
-        <div className="min-w-0 pt-4 sm:pt-8">
+      <motion.div style={{ opacity, scale }} className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-16 items-start px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20">
+        <div className="min-w-0 pt-2 sm:pt-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2.5 mb-6"
+            className="inline-flex items-center gap-2.5 mb-7"
           >
             <motion.span
-              animate={{ scale: [1, 1.3, 1] }}
+              animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="h-2 w-2 rounded-full bg-emerald-400 block"
+              className="h-2 w-2 rounded-full bg-emerald-400 block shadow-[0_0_8px_rgba(52,211,153,0.6)]"
             />
-            <span className="text-[11px] font-mono tracking-[0.15em] uppercase text-slate-400">
-              AsLynx · Indonesia · remote · {formatted} installations
+            <span className="text-[11px] font-mono tracking-[0.18em] uppercase text-slate-400">
+              AsLynx · Indonesia · remote · {formatted} installs
             </span>
           </motion.div>
 
           <h1 className="overflow-hidden">
-            <div className="text-[1.65rem] sm:text-[2.1rem] lg:text-[2.5rem] font-medium tracking-[-0.025em] leading-[1.1] text-white">
-              <KineticText>Building Bedrock systems that run reliably</KineticText>
+            <div className="text-[2rem] sm:text-[2.75rem] lg:text-[3.5rem] font-medium tracking-[-0.035em] leading-[1.05] text-white">
+              <KineticText>Bedrock systems that</KineticText>
             </div>
-            <div className="text-[1.65rem] sm:text-[2.1rem] lg:text-[2.5rem] font-light italic tracking-[-0.025em] leading-[1.1] mt-1">
+            <div className="text-[2rem] sm:text-[2.75rem] lg:text-[3.5rem] font-light tracking-[-0.035em] leading-[1.05] mt-1.5 flex flex-wrap items-baseline gap-x-3">
+              <KineticText>run</KineticText>
               <motion.span
-                animate={{ opacity: [0.4, 1, 0.4] }}
+                animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="text-cyan-300"
+                className="italic font-serif text-cyan-300"
               >
-                <KineticText>without burdening the server</KineticText>
+                <KineticText>without breaking</KineticText>
               </motion.span>
+            </div>
+            <div className="text-[2rem] sm:text-[2.75rem] lg:text-[3.5rem] font-medium tracking-[-0.035em] leading-[1.05] mt-1.5">
+              <span className="text-slate-500"><KineticText>the server.</KineticText></span>
             </div>
           </h1>
 
@@ -172,9 +176,9 @@ export default function Hero({ totalDownloads }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-5 max-w-[58ch] text-[15px] leading-[1.75] text-slate-400"
+            className="mt-6 max-w-[56ch] text-[15px] leading-[1.75] text-slate-400"
           >
-            Prompt specialist and Script API developer. I create performant Minecraft add-ons for Realms and BDS, practical prompt frameworks, and focused web tools that solve real problems.
+            Prompt specialist and Script API developer. Performant Minecraft add-ons for Realms and BDS, practical prompt frameworks, and focused web tools.
           </motion.p>
 
           <motion.div
@@ -230,7 +234,9 @@ export default function Hero({ totalDownloads }: HeroProps) {
           whileHover={{ rotate: 0, scale: 1.01, y: -4 }}
           className="relative"
         >
-          <div className="relative rounded-[20px] border border-white/10 bg-[#0b1224]/90 backdrop-blur-xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)]">
+          {/* Soft glow behind card */}
+          <div className="absolute -inset-4 bg-cyan-500/10 blur-3xl rounded-[40px] -z-10" />
+          <div className="relative rounded-[20px] border border-white/[0.12] bg-gradient-to-b from-[#0f172a]/95 to-[#0b1224]/95 backdrop-blur-xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(6,182,212,0.18),0_24px_60px_rgba(0,0,0,0.55)]">
             <div className="flex items-center justify-between gap-3 border-b border-white/5 bg-white/[0.02] px-4 py-3">
               <div className="flex items-center gap-2">
                 <motion.span animate={{ backgroundColor: ['rgba(251,113,133,0.5)', 'rgba(251,113,133,0.9)', 'rgba(251,113,133,0.5)'] }} transition={{ duration: 3, repeat: Infinity }} className="h-2.5 w-2.5 rounded-full block" />

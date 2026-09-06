@@ -37,7 +37,7 @@ export default function ExperienceSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.08 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -3, borderColor: 'rgba(255,255,255,0.15)' }}
-            className="group bg-[#0b1224]/60 hover:bg-[#0b1224]/85 border border-white/[0.07] hover:border-white/12 rounded-2xl p-6 sm:p-8 transition-all duration-300"
+            className="group bg-gradient-to-b from-[#0e1628]/70 to-[#070d1d]/80 hover:from-[#121e37]/80 hover:to-[#0d1328]/85 border border-white/[0.08] hover:border-white/18 rounded-2xl p-6 sm:p-8 transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
           >
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
               <div>

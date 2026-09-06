@@ -61,7 +61,7 @@ export default function FeaturedProjects() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{ y: -4 }}
-              className="group relative bg-[#0b1224]/60 hover:bg-[#0b1224]/90 border border-white/[0.07] hover:border-cyan-500/30 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 backdrop-blur-sm"
+              className="group relative bg-gradient-to-b from-[#0e1628]/80 to-[#070d1d]/90 hover:from-[#111d35]/90 hover:to-[#091024]/95 border border-white/[0.08] hover:border-cyan-500/35 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 backdrop-blur-sm shadow-[0_12px_36px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_-10px_rgba(6,182,212,0.15)]"
             >
               <div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4">

@@ -68,7 +68,7 @@ export default function FieldsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.08 + index * 0.07, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4 }}
-              className="group bg-[#0b1224]/60 hover:bg-[#0b1224]/90 border border-white/[0.07] hover:border-cyan-500/25 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300"
+              className="group bg-gradient-to-b from-[#0e1628]/70 to-[#070d1d]/85 hover:from-[#111d35]/85 hover:to-[#091024]/90 border border-white/[0.08] hover:border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 shadow-[0_12px_36px_-10px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_-10px_rgba(6,182,212,0.12)]"
             >
               <div>
                 <motion.div

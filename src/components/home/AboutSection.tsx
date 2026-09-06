@@ -42,8 +42,10 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="w-full lg:w-5/12 bg-[#0b1224]/60 border border-white/[0.07] rounded-2xl p-6 sm:p-8"
+          className="relative w-full lg:w-5/12 rounded-2xl"
         >
+          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-cyan-500/15 via-white/[0.02] to-transparent -z-10" />
+          <div className="relative bg-gradient-to-br from-[#0f172a] to-[#070d1d] border border-white/[0.08] rounded-2xl p-6 sm:p-8 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -76,7 +78,8 @@ export default function AboutSection() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

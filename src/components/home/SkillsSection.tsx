@@ -94,10 +94,10 @@ export default function SkillsSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: idx * 0.05 }}
               whileHover={{ y: -2 }}
-              className={`p-4 rounded-2xl flex flex-col gap-1.5 border transition-colors ${
+              className={`p-4 rounded-2xl flex flex-col gap-1.5 border transition-all shadow-[0_6px_24px_-8px_rgba(0,0,0,0.4)] ${
                 skill.highlight
-                  ? 'bg-[#0b1224]/70 border-cyan-500/20'
-                  : 'bg-[#0b1224]/50 border-white/[0.07] hover:border-white/15'
+                  ? 'bg-gradient-to-b from-[#0e1628] to-[#070d1d] border-cyan-500/25'
+                  : 'bg-gradient-to-b from-[#0e1628]/80 to-[#070d1d]/80 border-white/[0.07] hover:border-white/15'
               }`}
             >
               <div className="flex items-center justify-between gap-2">
